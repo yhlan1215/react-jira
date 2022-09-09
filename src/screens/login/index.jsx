@@ -4,15 +4,18 @@ export const LogInScreen = () => {
 
     const login = (param) => {
         fetch(`${apiURL}/login`,{
-            method:'post',
+            method:'POST',
             headers:{
-                'Content-type':'application/json'
+                'Content-Type':'application/json'
             },
             body:JSON.stringify(param)
         })
         .then(async(response)=>{
             if(response.ok){
             }
+        })
+        .catch((error)=>{
+            console.log(error)
         })
     }
 
