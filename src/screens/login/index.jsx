@@ -1,23 +1,8 @@
+import { useAuth } from "../../context/auth-context"
+
 export const LogInScreen = () => {
 
-    const apiURL = process.env.REACT_APP_API_URL
-
-    const login = (param) => {
-        fetch(`${apiURL}/login`,{
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(param)
-        })
-        .then(async(response)=>{
-            if(response.ok){
-            }
-        })
-        .catch((error)=>{
-            console.log(error)
-        })
-    }
+    const {login,user} = useAuth()
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -27,6 +12,7 @@ export const LogInScreen = () => {
     }
 
     return<form onSubmit={handleSubmit}>
+        {user ? <div>登陆成功，用户名:{user}</div> : null}
         <div>
             <label htmlFor="username">用户名</label>
             <input type="text" id={'username'} />
