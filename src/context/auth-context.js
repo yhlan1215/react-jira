@@ -4,18 +4,17 @@ import * as auth from '../auth-provider'
 const AuthContext = React.createContext(undefined)
 AuthContext.displayName = 'AuthContext'
 
-export const AuthProvider = () => {
+export const AuthProvider = ({children}) => {
+
     const[user,setUser] = useState(null)
-    const login = (form) => {auth.login(form)
-        .then(user => setUser(user))
-    }
-    const register = (form) => {auth.register(form)
-        .then(user => setUser(user))
-    }
-    const logout = () => {auth.logout()
-        .then(() => setUser(null))
-    }
-    return <AuthContext.Provider value={{user,login,register,logout}}/>
+
+    const login = (form) => auth.login(form).then(setUser)
+    const register = (form) => auth.register(form).then(setUser)
+    const logout = () => auth.logout().then(() => setUser(null))
+
+    return <AuthContext.Provider value={{user,login,register,logout}}>
+        {children}
+    </AuthContext.Provider>
 }
 
 export const useAuth = () => {

@@ -1,8 +1,8 @@
-import { useAuth } from "../../context/auth-context"
+import { useAuth } from "../context/auth-context"
 
-export const LogInScreen = () => {
+export const LoginScreen = () => {
 
-    const {login,user} = useAuth()
+    const {login} = useAuth()
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -12,7 +12,6 @@ export const LogInScreen = () => {
     }
 
     return<form onSubmit={handleSubmit}>
-        {user ? <div>登陆成功，用户名:{user}</div> : null}
         <div>
             <label htmlFor="username">用户名</label>
             <input type="text" id={'username'} />

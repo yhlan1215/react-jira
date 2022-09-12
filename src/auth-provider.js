@@ -10,7 +10,7 @@ export const handleUserResponse = ({user}) => {
 }
 
 export const login = (data) => {
-    fetch(`${apiURL}/login`,{
+    return fetch(`${apiURL}/login`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -19,7 +19,7 @@ export const login = (data) => {
     })
     .then(async(response)=>{
         if(response.ok){
-            handleUserResponse(await response.json())
+            return handleUserResponse(await response.json())
         }else {
             return Promise.reject(data)
         }
@@ -27,7 +27,7 @@ export const login = (data) => {
 }
 
 export const register = (data) => {
-    fetch(`${apiURL}/register`,{
+    return fetch(`${apiURL}/register`,{
         method:'POST',
         headers:{
             'Content-Type':'application/json'
@@ -36,7 +36,7 @@ export const register = (data) => {
     })
     .then(async(response)=>{
         if(response.ok){
-            handleUserResponse(await response.json())
+            return handleUserResponse(await response.json())
         }else {
             return Promise.reject(data)
         }
