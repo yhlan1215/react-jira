@@ -1,17 +1,18 @@
+import { Routes,Route } from 'react-router-dom';
 import './App.css';
-import { AuthenticatedApp } from './authenticated-app.';
-import { useAuth } from './context/auth-context';
-import { UnauthenticatedApp } from './unauthenticated-app';
+import { AuthenticatedApp, UnauthenticatedApp } from './pages'
+// import { useAuth } from './context/auth-context';
 
 function App() {
 
-  const {user} = useAuth()
+  // const {user} = useAuth()
 
   return (
     <div className="App">
-      {
-        user ? <AuthenticatedApp/> : <UnauthenticatedApp/>
-      }
+    <Routes>
+      <Route path='/' element={<UnauthenticatedApp/>}/>
+    </Routes>
+      <AuthenticatedApp/>
     </div>
   );
 }

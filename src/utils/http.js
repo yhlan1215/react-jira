@@ -1,8 +1,6 @@
 import QueryString from "qs"
 import * as auth from "../auth-provider"
-import { useAuth } from "../context/auth-context"
-
-const apiURL = process.env.REACT_APP_API_URL
+import { useAuth } from "../context/AuthContext"
 
 export const http = async(endpoint,{data,token,headers,...customConfig} = {}) => {
 
@@ -21,7 +19,7 @@ export const http = async(endpoint,{data,token,headers,...customConfig} = {}) =>
         config.body = JSON.stringify(data || {})
     }
 
-    return window.fetch(`${apiURL}/${endpoint}`,config)
+    return window.fetch(`http://localhost:8080/${endpoint}`,config)
     .then(async(res)=>{
         if(res.status === 401){
             await auth.logout()

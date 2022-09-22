@@ -1,18 +1,20 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { loadDevTools } from 'jira-dev-tool';
 import { AppProviders } from './context';
+import 'antd/dist/antd.css'
 
-loadDevTools(()=>{
-  const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(
     <AppProviders>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AppProviders>
-);})
+);
 
 
 
