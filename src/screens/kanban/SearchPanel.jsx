@@ -1,11 +1,19 @@
-import { Form, Input, Select } from 'antd'
+import { Button, Form, Input, Select } from 'antd'
+import { useEffect, useState } from 'react'
+import { useUser } from '../../utils/useRequests'
 
-export function SearchPanel({ param, setParam, users, isloading }) {
+export function SearchPanel({ param, setParam }) {
+  const { getUsers } = useUser()
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    getUsers().then(setUsers)
+  }, [])
+
   return (
     <Form layout="inline" style={{ marginBottom: '2rem' }}>
       <Form.Item>
         <Input
-          placeholder="项目名"
+          placeholder="任务名"
           type="text"
           value={param.name}
           onChange={(e) => {
@@ -17,7 +25,6 @@ export function SearchPanel({ param, setParam, users, isloading }) {
       </Form.Item>
       <Form.Item>
         <Select
-          loading={isloading}
           value={param.personId || ''}
           onChange={(value) => {
             setParam({
@@ -34,6 +41,23 @@ export function SearchPanel({ param, setParam, users, isloading }) {
                     ))
                 }
         </Select>
+      </Form.Item>
+      <Form.Item>
+        <Select
+          value={param.type || ''}
+          onChange={(value) => {
+            setParam({
+              type: value
+            })
+          }}
+        >
+          <Select.Option value="">类型</Select.Option>
+          <Select.Option value="task">任务</Select.Option>
+          <Select.Option value="bug">Bug</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item>
+        <Button>清空筛选</Button>
       </Form.Item>
     </Form>
   )

@@ -1,9 +1,9 @@
-import styled from "styled-components";
-import { Button, Dropdown, Menu } from "antd";
+import styled from 'styled-components'
+import { Button, Dropdown, Menu } from 'antd'
 import softwareLogo from '../../assets/software-logo.svg'
 import { useAuth } from '../../context'
-import { resetRoute } from "../../utils";
-import { ProjectPopover } from "../../screens";
+import { resetRoute } from '../../utils'
+import { ProjectPopover } from '../../screens'
 
 const Container = styled.header`
     grid-area: header;
@@ -25,26 +25,30 @@ const Img = styled.img`
     color: agb(38,132,255);
 `
 
-export const Header = () => {
-    
-    const {logout,user} = useAuth()
+export function Header() {
+  const { logout, user } = useAuth()
 
-    return  <Container>
-    <HeaderLeft>
+  return (
+    <Container>
+      <HeaderLeft>
         <Button type="link" onClick={resetRoute}>
-            <Img src={softwareLogo}/>
+          <Img src={softwareLogo} />
         </Button>
-        <ProjectPopover/>
+        <ProjectPopover />
         <span>用户</span>
-    </HeaderLeft>
-    <HeaderRight>
-        <Dropdown overlay={<Menu>
-            <Menu.Item key={'logout'}>
-                <Button type={'link'} onClick={logout}>登出</Button>
+      </HeaderLeft>
+      <HeaderRight>
+        <Dropdown overlay={(
+          <Menu>
+            <Menu.Item key="logout">
+              <Button type="link" onClick={logout}>登出</Button>
             </Menu.Item>
-        </Menu>}>
-            <Button type={'link'} onClick={(e)=>e.preventDefault}>Hi,{user?.name}你猜</Button>
+          </Menu>
+)}
+        >
+          <Button type="link" onClick={(e) => e.preventDefault}>Hi,{user?.name}你猜</Button>
         </Dropdown>
-    </HeaderRight>
-</Container>
+      </HeaderRight>
+    </Container>
+  )
 }

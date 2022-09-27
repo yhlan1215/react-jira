@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import styled from "styled-components";
+import styled from 'styled-components'
 import { Header } from '../../layouts'
 import { ProjectListScreen, ProjectScreen } from '../../screens'
 
@@ -16,16 +16,16 @@ const Main = styled.main`
     grid-area: main;
 `
 
-export const AuthenticatedApp = () => {
-
-
-    return<Container>
-        <Header/>
-        <Main>
-                <Routes>
-                    <Route path='/projects' element={<ProjectListScreen/>} />
-                    <Route path='/projects/:projectId/*' element={<ProjectScreen/>}/>
-                </Routes>
-        </Main>
+export function AuthenticatedApp() {
+  return (
+    <Container>
+      <Header />
+      <Main>
+        <Routes>
+          <Route path="/" element={<ProjectListScreen />} />
+          <Route path="/:projectId/*" element={<ProjectScreen />} />
+        </Routes>
+      </Main>
     </Container>
+  )
 }

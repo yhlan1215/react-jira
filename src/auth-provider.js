@@ -4,43 +4,37 @@ const localStorageKey = '__auth_provider_token__'
 
 export const getToken = () => window.localStorage.getItem(localStorageKey)
 
-export const handleUserResponse = ({user}) => {
-    window.localStorage.setItem(localStorageKey,user.token || '')
-    return user
+export const handleUserResponse = ({ user }) => {
+  window.localStorage.setItem(localStorageKey, user.token || '')
+  return user
 }
 
-export const login = (data) => {
-    return fetch(`${apiURL}/login`,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(data)
-    })
-    .then(async(response)=>{
-        if(response.ok){
-            return handleUserResponse(await response.json())
-        }else {
-            return Promise.reject(data)
-        }
-    })
-}
+export const login = (data) => fetch(`${apiURL}/login`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(async (response) => {
+    if (response.ok) {
+      return handleUserResponse(await response.json())
+    }
+    return Promise.reject(data)
+  })
 
-export const register = (data) => {
-    return fetch(`${apiURL}/register`,{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
-        },
-        body:JSON.stringify(data)
-    })
-    .then(async(response)=>{
-        if(response.ok){
-            return handleUserResponse(await response.json())
-        }else {
-            return Promise.reject(data)
-        }
-    })
-}
+export const register = (data) => fetch(`${apiURL}/register`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(async (response) => {
+    if (response.ok) {
+      return handleUserResponse(await response.json())
+    }
+    return Promise.reject(data)
+  })
 
-export const logout = async() => window.localStorage.removeItem(localStorageKey)
+export const logout = async () => window.localStorage.removeItem(localStorageKey)
