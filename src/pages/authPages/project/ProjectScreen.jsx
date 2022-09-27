@@ -1,9 +1,8 @@
 import { Link, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { Layout, Menu } from 'antd'
 import styled from 'styled-components'
-import { EpicScreen } from '../epic'
-import { KanbanScreen } from '../kanban'
-import { ScreenContainer } from '../../components'
+import { KanbanScreen, EpicScreen } from '.'
+import { ScreenContainer } from '../../../components'
 
 const MainLayout = styled(Layout)`
     height: 100%;

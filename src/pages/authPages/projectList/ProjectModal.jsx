@@ -1,8 +1,8 @@
 import { Button, Drawer, Form, Input, message, Select } from 'antd'
 import { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { useSetting } from '../../context/SettingContext'
-import { useProject } from '../../utils/useRequests'
+import { useSetting } from '../../../context/SettingContext'
+import { useProject } from '../../../utils/useRequests'
 
 const Container = styled.div`
     height: 80vh;
@@ -23,12 +23,13 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
           await postProject({ ...clonedProject, pin: false })
           onProjectSaved()
           onClose()
+          message.success('新建成功')
         } else {
           await putProject(id, clonedProject)
           onProjectSaved()
           onClose()
+          message.success('编辑成功')
         }
-        message.success('保存成功')
       })
   }
 

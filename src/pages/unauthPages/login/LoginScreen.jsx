@@ -1,7 +1,7 @@
 import { Button, Form, Input } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import { LongButton } from '../../pages'
-import { useAuth } from '../../context'
+import { LongButton } from '../..'
+import { useAuth } from '../../../context'
 
 export function LoginScreen() {
   const { login } = useAuth()

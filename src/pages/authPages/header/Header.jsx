@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Button, Dropdown, Image, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import softwareLogo from '../../assets/jira.png'
-import { useAuth } from '../../context'
-import { resetRoute } from '../../utils'
+import softwareLogo from '../../../assets/jira.png'
+import { useAuth } from '../../../context'
+import { resetRoute } from '../../../utils'
 
 const Container = styled.div`
   display: flex;

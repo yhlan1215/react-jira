@@ -1,14 +1,14 @@
 import { Button, Row } from 'antd'
 import { useState, useEffect } from 'react'
-import { clone, useDocumentTitle } from '../../utils/index'
 import { List } from './List'
 import { SearchPanel } from './SearchPanel'
-import { useProject } from '../../utils/useRequests'
-import { ProjectModal } from '../projectModal'
-import { useUrlSearchParam } from '../../utils/url'
-import { ScreenContainer } from '../../components'
+import { clone, useDocumentTitle } from '../../../utils'
+import { useProject } from '../../../utils/useRequests'
+import { useUrlSearchParam } from '../../../utils/url'
+import { ProjectModal } from './ProjectModal'
+import { ScreenContainer } from '../../../components'
 
-export function ProjectListScreen() {
+export function ProjectList() {
   const { getProjects } = useProject()
   const [projects, setProjects] = useState([])
   const [shownProjects, setShownProjects] = useState([])
@@ -45,6 +45,10 @@ export function ProjectListScreen() {
       setProjects(data)
     })
   }
+  const onEdit = (id) => {
+    setSelectedId(id)
+    setProjectModalOpen(true)
+  }
 
   const onPin = (id) => {
     const clonedProjects = clone(projects)
@@ -55,8 +59,9 @@ export function ProjectListScreen() {
 
   return (
     <ScreenContainer>
+      <h1>项目列表</h1>
       <Row justify="space-between">
-        <h1>项目列表</h1>
+        <SearchPanel />
         <Button onClick={() => {
           setSelectedId('')
           setProjectModalOpen(true)
@@ -64,16 +69,18 @@ export function ProjectListScreen() {
         >新建项目
         </Button>
       </Row>
-      <SearchPanel />
       <List
         dataSource={shownProjects}
         onPin={onPin}
-        onEdit={(id) => {
-          setSelectedId(id)
-          setProjectModalOpen(true)
-        }}
+        onEdit={onEdit}
+        onProjectDeleted={getProjectsFromServer}
       />
-      <ProjectModal id={selectedId} open={projectModalOpen} onClose={() => setProjectModalOpen(false)} onProjectSaved={getProjectsFromServer} />
+      <ProjectModal
+        id={selectedId}
+        open={projectModalOpen}
+        onClose={() => setProjectModalOpen(false)}
+        onProjectSaved={getProjectsFromServer}
+      />
     </ScreenContainer>
   )
 }

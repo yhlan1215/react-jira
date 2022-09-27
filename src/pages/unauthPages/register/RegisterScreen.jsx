@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd'
-import { LongButton } from '../../pages'
-import { useAuth } from '../../context/AuthContext'
+import { useAuth } from '../../../context'
+import { LongButton } from '../UnauthPages'
 
 export function RegisterScreen() {
   const { register } = useAuth()

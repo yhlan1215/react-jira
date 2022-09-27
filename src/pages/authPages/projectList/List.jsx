@@ -1,12 +1,18 @@
-import { Dropdown, Menu, Table, Button } from 'antd'
+import { Dropdown, Menu, Table, Button, message } from 'antd'
 import { Link } from 'react-router-dom'
-import { useProject } from '../../utils/useRequests'
-import { Pin } from '../../components'
-import { useSetting } from '../../context'
+import { Pin } from '../../../components'
+import { useSetting } from '../../../context'
+import { useProject } from '../../../utils/useRequests'
 
-export function List({ onPin, getProjectsFromServer, onEdit, onDelete, ...props }) {
+export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
   const { deleteProject, putProject } = useProject()
   const { users } = useSetting()
+
+  const onDelete = async (id) => {
+    await deleteProject(id)
+    onProjectDeleted()
+    message.success('删除成功')
+  }
 
   return (
     <div>
@@ -41,8 +47,11 @@ export function List({ onPin, getProjectsFromServer, onEdit, onDelete, ...props 
           {
             key: 'personId',
             title: '负责人',
-            render: (name, project) => <div>{users?.find((user) => user.id === project.personId)?.name || '未知'}</div>
-          },
+            render: (name, project) => (
+              <div>
+                {users?.find((user) => user.id === project.personId)?.name || '未知'}
+              </div>
+            ) },
           {
             key: 'action',
             title: 'action',
@@ -59,7 +68,13 @@ export function List({ onPin, getProjectsFromServer, onEdit, onDelete, ...props 
                       编辑
                     </Button>
                   </Menu.Item>
-                  <Menu.Item key="delete"><Button type="link" onClick={() => deleteProject(project.id)}>删除</Button></Menu.Item>
+                  <Menu.Item key="delete">
+                    <Button
+                      type="link"
+                      onClick={() => onDelete(project.id)}
+                    >删除
+                    </Button>
+                  </Menu.Item>
                 </Menu>
                 )}
               >

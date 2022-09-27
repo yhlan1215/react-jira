@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useProject } from '../../utils/useRequests'
+import { useProject } from '../../../../utils/useRequests'
 
 export const useProjectInUrl = () => {
   const [project, setProject] = useState([])

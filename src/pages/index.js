@@ -1,2 +1,2 @@
-export * from './authenticatedApp'
-export * from './unauthenticatedApp'
+export * from './authPages'
+export * from './unauthPages'

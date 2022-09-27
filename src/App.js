@@ -1,16 +1,14 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import './App.css'
-import { AuthenticatedApp, UnauthenticatedApp } from './pages'
-// import { useAuth } from './context/auth-context';
+import { UnauthPage, AuthPage } from './pages'
 
 function App() {
-  // const {user} = useAuth()
-
   return (
     <div className="App">
       <Routes>
-        <Route path="/login" element={<UnauthenticatedApp />} />
-        <Route path="/*" element={<AuthenticatedApp />} />
+        <Route path="/login" element={<UnauthPage />} />
+        <Route path="/*" element={<AuthPage />} />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </div>
   )

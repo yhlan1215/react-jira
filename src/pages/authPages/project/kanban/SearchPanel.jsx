@@ -1,6 +1,6 @@
 import { Button, Form, Input, Select } from 'antd'
-import { useSetting } from '../../context'
-import { useUrlSearchParam } from '../../utils/url'
+import { useSetting } from '../../../../context'
+import { useUrlSearchParam } from '../../../../utils/url'
 
 export function SearchPanel() {
   const { users } = useSetting()

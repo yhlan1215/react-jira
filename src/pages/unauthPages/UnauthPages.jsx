@@ -1,7 +1,7 @@
 import { Button, Card, Divider } from 'antd'
 import { useState } from 'react'
 import styled from 'styled-components'
-import { LoginScreen, RegisterScreen } from '../../screens'
+import { LoginScreen, RegisterScreen } from '.'
 import logo from '../../assets/logo.svg'
 import left from '../../assets/left.svg'
 import right from '../../assets/right.svg'
@@ -53,7 +53,7 @@ const Container = styled.div`
   min-height: 100vh;
 `
 
-export function UnauthenticatedApp() {
+export function UnauthPage() {
   const [isRegister, setIsRegister] = useState(false)
   useDocumentTitle('jira任务管理系统')
   return (
