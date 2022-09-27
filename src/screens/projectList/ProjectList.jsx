@@ -1,41 +1,79 @@
 import { Button, Row } from 'antd'
 import { useState, useEffect } from 'react'
-import { useDocumentTitle } from '../../utils/index'
+import { clone, useDocumentTitle } from '../../utils/index'
 import { List } from './List'
 import { SearchPanel } from './SearchPanel'
-import { useUser, useProject } from '../../utils/useRequests'
-import { ProjectMOdal } from '../projectModal'
-import { useProjectModal } from '../../context/ProjectModalContext'
+import { useProject } from '../../utils/useRequests'
+import { ProjectModal } from '../projectModal'
 import { useUrlSearchParam } from '../../utils/url'
 import { ScreenContainer } from '../../components'
 
 export function ProjectListScreen() {
   const { getProjects } = useProject()
   const [projects, setProjects] = useState([])
-  const { getUsers } = useUser()
-  const [users, setUsers] = useState([])
-  const { open } = useProjectModal()
-  const [param, setParam] = useUrlSearchParam(['name', 'personId'])
-  const [isLoading, setIsloading] = useState(false)
+  const [shownProjects, setShownProjects] = useState([])
+  const [param] = useUrlSearchParam(['name', 'personId'])
   useDocumentTitle('项目列表')
+  const [projectModalOpen, setProjectModalOpen] = useState(false)
+  const [selectedId, setSelectedId] = useState('')
 
   useEffect(() => {
-    getProjects().then(setProjects)
-    getUsers().then(setUsers)
+    getProjectsFromServer()
   }, [])
+
   useEffect(() => {
-    setIsloading(!isLoading)
-  }, [projects])
+    if (!projects.length) {
+      return
+    }
+
+    let tempShownProjects = clone(projects)
+
+    if (param.personId) {
+      tempShownProjects = tempShownProjects.filter((project) => project.personId === param.personId)
+    }
+
+    if (param.name) {
+      tempShownProjects = tempShownProjects.filter((project) => project.name.includes(param.name))
+    }
+
+    setShownProjects(tempShownProjects)
+  }, [param, projects])
+
+  const getProjectsFromServer = () => {
+    getProjects().then((data) => {
+      data.forEach((project) => { project.key = project.id })
+      setProjects(data)
+    })
+  }
+
+  const onPin = (id) => {
+    const clonedProjects = clone(projects)
+    const foundProject = clonedProjects.find((project) => project.id === id)
+    foundProject.pin = !foundProject.pin
+    setProjects(clonedProjects)
+  }
 
   return (
     <ScreenContainer>
       <Row justify="space-between">
         <h1>项目列表</h1>
-        <Button onClick={open}>新建项目</Button>
+        <Button onClick={() => {
+          setSelectedId('')
+          setProjectModalOpen(true)
+        }}
+        >新建项目
+        </Button>
       </Row>
-      <ProjectMOdal users={users} />
-      <SearchPanel param={param} setParam={setParam} users={users} isloading={isLoading} />
-      <List dataSource={projects} users={users} loading={isLoading} />
+      <SearchPanel />
+      <List
+        dataSource={shownProjects}
+        onPin={onPin}
+        onEdit={(id) => {
+          setSelectedId(id)
+          setProjectModalOpen(true)
+        }}
+      />
+      <ProjectModal id={selectedId} open={projectModalOpen} onClose={() => setProjectModalOpen(false)} onProjectSaved={getProjectsFromServer} />
     </ScreenContainer>
   )
 }

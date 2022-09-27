@@ -1,6 +1,8 @@
-import { Button, Drawer, Form, Input, Select } from 'antd'
+import { Button, Drawer, Form, Input, message, Select } from 'antd'
+import { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import { useProjectModal } from '../../context'
+import { useSetting } from '../../context/SettingContext'
+import { useProject } from '../../utils/useRequests'
 
 const Container = styled.div`
     height: 80vh;
@@ -9,13 +11,46 @@ const Container = styled.div`
     align-items: center;
 `
 
-export function ProjectMOdal({ users }) {
-  const { isProjectModalOpen, close, project } = useProjectModal()
+export function ProjectModal({ id, open, onClose, onProjectSaved }) {
+  const { users } = useSetting()
+  const { getProject, postProject, putProject } = useProject()
+  const formRef = useRef()
+  const onSave = () => {
+    formRef.current.validateFields()
+      .then(async (project) => {
+        const clonedProject = JSON.parse(JSON.stringify(project))
+        if (!id) {
+          await postProject({ ...clonedProject, pin: false })
+          onProjectSaved()
+          onClose()
+        } else {
+          await putProject(id, clonedProject)
+          onProjectSaved()
+          onClose()
+        }
+        message.success('保存成功')
+      })
+  }
+
+  useEffect(() => {
+    if (open) {
+      if (id) {
+        getProject(id).then(formRef.current.setFieldsValue)
+      } else {
+        formRef.current.setFieldsValue({
+          id: '',
+          name: '',
+          organization: '',
+          personId: ''
+        })
+      }
+    }
+  }, [id, open])
 
   return (
-    <Drawer open={isProjectModalOpen} onClose={close} width="100%">
+    <Drawer open={open} onClose={onClose} width="100%">
       <Container>
-        <Form ref={project}>
+        <Form ref={formRef}>
           <Form.Item label="名称" name="name" rules={[{ required: true, message: '请输入项目名' }]}>
             <Input placeholder="请输入项目名" />
           </Form.Item>
@@ -25,17 +60,17 @@ export function ProjectMOdal({ users }) {
           <Form.Item label="负责人" name="personId">
             <Select>
               {
-                        users?.map((user) => (
-                          <Select.Option key={user.id} value={user.id}>
-                            {user.name}
-                          </Select.Option>
-                        ))
-                    }
+                users?.map((user) => (
+                  <Select.Option key={user.id} value={user.id}>
+                    {user.name}
+                  </Select.Option>
+                ))
+              }
             </Select>
           </Form.Item>
           <Form.Item style={{ textAlign: 'center' }}>
-            <Button type="primary" htmlType="submit">保存</Button>
-            <Button>取消</Button>
+            <Button type="primary" htmlType="submit" onClick={onSave}>{id ? '保存' : '新建'}</Button>
+            <Button onClick={onClose}>取消</Button>
           </Form.Item>
         </Form>
       </Container>

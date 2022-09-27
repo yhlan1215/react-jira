@@ -6,14 +6,13 @@ import { KanbanScreen } from '../kanban'
 import { ScreenContainer } from '../../components'
 
 const MainLayout = styled(Layout)`
-    height: 85vh;
+    height: 100%;
 `
 const LayoutSider = styled(Layout.Sider)`
     background-color: white;
 `
 const LayoutContent = styled(Layout.Content)`
     height: 85vh;
-    padding-top: 2.5rem;
     padding-left: 2.5rem;
 `
 

@@ -1,6 +1,11 @@
 import { Form, Input, Select } from 'antd'
+import { useSetting } from '../../context'
+import { useUrlSearchParam } from '../../utils/url'
 
-export function SearchPanel({ param, setParam, users, isloading }) {
+export function SearchPanel() {
+  const [param, setParam] = useUrlSearchParam(['name', 'personId'])
+  const { users } = useSetting()
+
   return (
     <Form layout="inline" style={{ marginBottom: '2rem' }}>
       <Form.Item>
@@ -17,7 +22,6 @@ export function SearchPanel({ param, setParam, users, isloading }) {
       </Form.Item>
       <Form.Item>
         <Select
-          loading={isloading}
           value={param.personId || ''}
           onChange={(value) => {
             setParam({

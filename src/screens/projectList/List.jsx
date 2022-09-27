@@ -1,12 +1,12 @@
 import { Dropdown, Menu, Table, Button } from 'antd'
 import { Link } from 'react-router-dom'
-import { useProjectModal } from '../../context'
 import { useProject } from '../../utils/useRequests'
 import { Pin } from '../../components'
+import { useSetting } from '../../context'
 
-export function List({ users, ...props }) {
-  const { openOriginal } = useProjectModal()
+export function List({ onPin, getProjectsFromServer, onEdit, onDelete, ...props }) {
   const { deleteProject, putProject } = useProject()
+  const { users } = useSetting()
 
   return (
     <div>
@@ -17,7 +17,15 @@ export function List({ users, ...props }) {
             key: 'pin',
             title: <Pin checkd disabled />,
             dataIndex: 'pin',
-            render: (value, project) => <Pin checkd={value} onCheckdChange={() => putProject(project.id, { pin: !value })} />
+            render: (value, project) => (
+              <Pin
+                checkd={value}
+                onCheckdChange={() => {
+                  onPin(project.id)
+                  putProject(project.id, { pin: !value })
+                }}
+              />
+            )
           },
           {
             key: 'name',
@@ -41,10 +49,19 @@ export function List({ users, ...props }) {
             render: (value, project) => (
               <Dropdown overlay={(
                 <Menu>
-                  <Menu.Item key="edit"><Button type="link" onClick={() => openOriginal(project.id)}>编辑</Button></Menu.Item>
+                  <Menu.Item key="edit">
+                    <Button
+                      type="link"
+                      onClick={() => {
+                        onEdit(project.id)
+                      }}
+                    >
+                      编辑
+                    </Button>
+                  </Menu.Item>
                   <Menu.Item key="delete"><Button type="link" onClick={() => deleteProject(project.id)}>删除</Button></Menu.Item>
                 </Menu>
-)}
+                )}
               >
                 <Button type="link">...</Button>
               </Dropdown>

@@ -1,12 +1,12 @@
 import { AuthProvider } from './AuthContext'
-import { ProjectModalProvider } from './ProjectModalContext'
+import { SettingProvider } from './SettingContext'
 
 export function AppProviders({ children }) {
   return (
     <AuthProvider>
-      <ProjectModalProvider>
+      <SettingProvider>
         {children}
-      </ProjectModalProvider>
+      </SettingProvider>
     </AuthProvider>
   )
 }

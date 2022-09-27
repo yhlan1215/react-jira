@@ -1,54 +1,87 @@
 import styled from 'styled-components'
-import { Button, Dropdown, Menu } from 'antd'
-import softwareLogo from '../../assets/software-logo.svg'
+import { Button, Dropdown, Image, Menu } from 'antd'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import softwareLogo from '../../assets/jira.png'
 import { useAuth } from '../../context'
 import { resetRoute } from '../../utils'
-import { ProjectPopover } from '../../screens'
 
-const Container = styled.header`
-    grid-area: header;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 3.2rem;
-    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 3.2rem;
 `
 const HeaderLeft = styled.div`
     display: flex;
-    width: 30rem;
-    justify-content: space-between;
-`
-const HeaderRight = styled.div``
-
-const Img = styled.img`
-    width: 18rem;
-    color: agb(38,132,255);
+    height: 100%;
 `
 
 export function Header() {
   const { logout, user } = useAuth()
+  const [selectedKey, setSelectedKey] = useState('')
+  const location = useLocation()
+  const nav = useNavigate()
+
+  useEffect(() => {
+    if (location.pathname.includes('/projects')) {
+      setSelectedKey('projects')
+    } else if (location.pathname.includes('/users')) {
+      setSelectedKey('users')
+    }
+  }, [location])
 
   return (
     <Container>
       <HeaderLeft>
         <Button type="link" onClick={resetRoute}>
-          <Img src={softwareLogo} />
+          <Image
+            src={softwareLogo}
+            height="5rem"
+            width="5rem"
+            preview={false}
+          />
         </Button>
-        <ProjectPopover />
-        <span>用户</span>
+
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          selectedKeys={[selectedKey]}
+          items={[{
+            key: 'projects',
+            label: '项目'
+          }, {
+            key: 'users',
+            label: '用户'
+          }]}
+          style={{ marginLeft: '4rem' }}
+          onSelect={(item) => {
+            switch (item.key) {
+              case 'projects':
+                nav('/projects')
+                break
+              case 'users':
+              default:
+                nav('/users')
+                break
+            }
+          }}
+        />
       </HeaderLeft>
-      <HeaderRight>
+      <div>
         <Dropdown overlay={(
           <Menu>
             <Menu.Item key="logout">
               <Button type="link" onClick={logout}>登出</Button>
             </Menu.Item>
           </Menu>
-)}
+          )}
         >
           <Button type="link" onClick={(e) => e.preventDefault}>Hi,{user?.name}你猜</Button>
         </Dropdown>
-      </HeaderRight>
+      </div>
     </Container>
   )
 }

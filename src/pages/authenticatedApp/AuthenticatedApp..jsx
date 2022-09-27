@@ -1,29 +1,30 @@
+import { Layout } from 'antd'
 import { Routes, Route } from 'react-router-dom'
 import styled from 'styled-components'
 import { Header } from '../../layouts'
-import { ProjectListScreen, ProjectScreen } from '../../screens'
+import { ProjectListScreen, ProjectScreen, UserList } from '../../screens'
 
-const Container = styled.div`
-    display: grid;
-    grid-template-rows: 6rem 1fr;
-    grid-template-columns: 100vw;
+const Container = styled(Layout)`
+    flex-direction: column;
     height: 100vh;
-    grid-template-areas: 
-    "header"
-    "main";
+    width: 100vw;
 `
-const Main = styled.main`
-    grid-area: main;
+const Main = styled(Layout.Content)`
+    height: 100%;
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
 `
 
 export function AuthenticatedApp() {
   return (
     <Container>
-      <Header />
+      <Layout.Header>
+        <Header />
+      </Layout.Header>
       <Main>
         <Routes>
-          <Route path="/" element={<ProjectListScreen />} />
-          <Route path="/:projectId/*" element={<ProjectScreen />} />
+          <Route path="/projects" element={<ProjectListScreen />} />
+          <Route path="/projects/:projectId/*" element={<ProjectScreen />} />
+          <Route path="/users" element={<UserList />} />
         </Routes>
       </Main>
     </Container>

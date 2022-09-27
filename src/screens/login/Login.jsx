@@ -5,7 +5,7 @@ import { useAuth } from '../../context'
 
 export function LoginScreen() {
   const { login } = useAuth()
-  const Nav = useNavigate()
+  const nav = useNavigate()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,7 +23,7 @@ export function LoginScreen() {
         <Input placeholder="密码" type="password" id="password" />
       </Form.Item>
       <LongButton htmlType="submit" type="primary">登录</LongButton>
-      <Button onClick={() => { Nav('/projects') }}>进入</Button>
+      <Button onClick={() => { nav('/projects') }}>进入</Button>
     </Form>
   )
 }

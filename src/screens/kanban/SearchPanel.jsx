@@ -1,13 +1,13 @@
 import { Button, Form, Input, Select } from 'antd'
-import { useEffect, useState } from 'react'
-import { useUser } from '../../utils/useRequests'
+import { useSetting } from '../../context'
+import { useUrlSearchParam } from '../../utils/url'
 
-export function SearchPanel({ param, setParam }) {
-  const { getUsers } = useUser()
-  const [users, setUsers] = useState([])
-  useEffect(() => {
-    getUsers().then(setUsers)
-  }, [])
+export function SearchPanel() {
+  const { users } = useSetting()
+  const [param, setParam] = useUrlSearchParam(['name', 'processorId', 'type'])
+  const reset = () => {
+    setParam({ ...param, processorId: '', name: '', type: '' })
+  }
 
   return (
     <Form layout="inline" style={{ marginBottom: '2rem' }}>
@@ -25,10 +25,10 @@ export function SearchPanel({ param, setParam }) {
       </Form.Item>
       <Form.Item>
         <Select
-          value={param.personId || ''}
+          value={param.processorId || ''}
           onChange={(value) => {
             setParam({
-              personId: value
+              processorId: value
             })
           }}
         >
@@ -57,7 +57,7 @@ export function SearchPanel({ param, setParam }) {
         </Select>
       </Form.Item>
       <Form.Item>
-        <Button>清空筛选</Button>
+        <Button onClick={reset}>清空筛选</Button>
       </Form.Item>
     </Form>
   )
