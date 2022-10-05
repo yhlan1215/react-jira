@@ -1,17 +1,20 @@
-import { Dropdown, Menu, Table, Button, message } from 'antd'
+import { EllipsisOutlined } from '@ant-design/icons'
+import { Dropdown, Menu, Table, Button, message, Popconfirm } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Pin } from '../../../components'
-import { useSetting } from '../../../context'
-import { useProject } from '../../../utils/useRequests'
+import { Pin } from '../../components'
+import { useSetting } from '../../context'
+import { useProject } from '../../utils/useRequests'
 
 export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
   const { deleteProject, putProject } = useProject()
   const { users } = useSetting()
+  const { t } = useTranslation()
 
   const onDelete = async (id) => {
     await deleteProject(id)
     onProjectDeleted()
-    message.success('删除成功')
+    message.success(t('projectList.deleteSuccess'))
   }
 
   return (
@@ -21,8 +24,9 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
         columns={[
           {
             key: 'pin',
-            title: <Pin checkd disabled />,
             dataIndex: 'pin',
+            width: '3rem',
+            align: 'center',
             render: (value, project) => (
               <Pin
                 checkd={value}
@@ -35,18 +39,18 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
           },
           {
             key: 'name',
-            title: '名称',
+            title: <div>{t('projectList.name')}</div>,
             dataIndex: 'name',
-            render: (value, project) => <Link to={project.id}>{value}</Link>
+            render: (value, project) => <Link to={`/projects/${project.id}/kanban`}>{value}</Link>
           },
           {
             key: 'organization',
-            title: '部门',
+            title: <div>{t('projectList.organization')}</div>,
             dataIndex: 'organization'
           },
           {
             key: 'personId',
-            title: '负责人',
+            title: <div>{t('projectList.processor')}</div>,
             render: (name, project) => (
               <div>
                 {users?.find((user) => user.id === project.personId)?.name || '未知'}
@@ -54,7 +58,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
             ) },
           {
             key: 'action',
-            title: 'action',
+            title: <div>{t('common.action')}</div>,
             render: (value, project) => (
               <Dropdown overlay={(
                 <Menu>
@@ -65,20 +69,23 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
                         onEdit(project.id)
                       }}
                     >
-                      编辑
+                      {t('common.edit')}
                     </Button>
                   </Menu.Item>
                   <Menu.Item key="delete">
-                    <Button
-                      type="link"
-                      onClick={() => onDelete(project.id)}
-                    >删除
-                    </Button>
+                    <Popconfirm
+                      title={t('projectList.deleteHeader')}
+                      okText={t('common.OK')}
+                      cancelText={t('common.cancel')}
+                      onConfirm={() => onDelete(project.id)}
+                    >
+                      <Button type="link">{t('common.delete')}</Button>
+                    </Popconfirm>
                   </Menu.Item>
                 </Menu>
                 )}
               >
-                <Button type="link">...</Button>
+                <Button icon={<EllipsisOutlined />} shape="circle" />
               </Dropdown>
             )
           }

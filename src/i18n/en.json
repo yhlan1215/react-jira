@@ -1,0 +1,57 @@
+{   
+    "common":{
+        "project":"Project",
+        "user":"User",
+        "reset":"Reset",
+        "action":"Action",
+        "edit":"Edit",
+        "delete":"Delete",
+        "create":"Create",
+        "OK":"OK",
+        "cancel":"Cancel",
+        "save":"Save",
+        "all":"All",
+        "high":"High",
+        "medium":"Medium",
+        "low":"Low"
+    },    
+    "header":{
+        "chinese":"Chinese",
+        "english":"English",
+        "logout":"Logout"
+    },
+    "loginPage": {
+        "title": "Please log in",
+        "login": "Login",
+        "signUpMessage":"Don't have an account? Sign up for a new account",
+        "userName":"username",
+        "password":"Password",
+        "userNameWarning":"Please input your username",
+        "passwordWarning":"Please input your password"
+    },
+    "registerPage": {
+        "title": "Please register",
+        "register": "Register",
+        "loginMessage":"You already have an account? Direct login",
+        "userName":"Username",
+        "password":"Password",
+        "confirmPassword":"Please confirm the password",
+        "userNameWarning":"Please input your username",
+        "passwordWarning":"Please input your password"
+    }, 
+    "projectList":{
+        "title":"Project List",
+        "projectName":"Project Name",
+        "processor":"Processor",
+        "createProject":"New Project",
+        "modalEditHeader":"Edit Project",
+        "name":"Name",
+        "organization":"Organization",
+        "nameWarning":"Please enter the project name",
+        "organizationWarning":"Please enter the organization name",
+        "editSuccess":"Edit success",
+        "newSuccess":"New success",
+        "deleteSuceess":"Successfully delete",
+        "deleteHeader":"Are you sure you want to delete this project?"
+    }
+}

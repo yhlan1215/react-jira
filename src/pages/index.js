@@ -1,2 +1,5 @@
-export * from './authPages'
+export * from './header'
+export * from './kanbanPage'
+export * from './projectListPage'
+export * from './user'
 export * from './unauthPages'

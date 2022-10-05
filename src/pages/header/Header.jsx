@@ -2,9 +2,11 @@ import styled from 'styled-components'
 import { Button, Dropdown, Image, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import softwareLogo from '../../../assets/jira.png'
-import { useAuth } from '../../../context'
-import { resetRoute } from '../../../utils'
+import { TranslationOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
+import softwareLogo from '../../assets/jira.png'
+import { useAuth, useSetting } from '../../context'
+import { resetRoute } from '../../utils'
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +26,8 @@ export function Header() {
   const [selectedKey, setSelectedKey] = useState('')
   const location = useLocation()
   const nav = useNavigate()
+  const { language, setLanguage } = useSetting()
+  const { t } = useTranslation()
 
   useEffect(() => {
     if (location.pathname.includes('/projects')) {
@@ -51,13 +55,13 @@ export function Header() {
           selectedKeys={[selectedKey]}
           items={[{
             key: 'projects',
-            label: '项目'
+            label: t('common.project')
           }, {
             key: 'users',
-            label: '用户'
+            label: t('common.user')
           }]}
-          style={{ marginLeft: '4rem' }}
-          onSelect={(item) => {
+          style={{ marginLeft: '4rem', width: '30rem' }}
+          onClick={(item) => {
             switch (item.key) {
               case 'projects':
                 nav('/projects')
@@ -71,10 +75,21 @@ export function Header() {
         />
       </HeaderLeft>
       <div>
+        <Dropdown
+          placement="bottomRight"
+          overlay={(
+            <Menu selectedKeys={[language]} onClick={(e) => setLanguage(e.key)}>
+              <Menu.Item key="en">{t('header.english')}</Menu.Item>
+              <Menu.Item key="zh">{t('header.chinese')}</Menu.Item>
+            </Menu>
+          )}
+        >
+          <TranslationOutlined style={{ color: 'white', fontSize: '2.5rem', marginRight: '1rem' }} />
+        </Dropdown>
         <Dropdown overlay={(
           <Menu>
             <Menu.Item key="logout">
-              <Button type="link" onClick={logout}>登出</Button>
+              <Button type="link" onClick={logout}>{t('header.logout')}</Button>
             </Menu.Item>
           </Menu>
           )}

@@ -97,9 +97,9 @@ export const useUser = () => ({ getUsers, getUser, putUser, postUser, deleteUser
 //----------------------------------------------------------
 // Kanban
 //----------------------------------------------------------
-const getKanbans = async () => {
+const getKanbans = async (projectId) => {
   const { data } = await axios.request({
-    url: '/kanbans',
+    url: `/kanbans${projectId ? `?projectId=${projectId}` : ''}`,
     method: 'get'
   })
   return data
@@ -144,9 +144,16 @@ export const useKanban = () => ({ getKanbans, getKanban, putKanban, postKanban, 
 //----------------------------------------------------------
 // Tasks
 //----------------------------------------------------------
-const getTasks = async () => {
+const getTasks = async (projectId, kanbanId) => {
+  let url = '/tasks'
+  if (projectId) {
+    url += `?projectId=${projectId}`
+  }
+  if (kanbanId) {
+    url += `?kanbanId=${kanbanId}`
+  }
   const { data } = await axios.request({
-    url: '/tasks',
+    url,
     method: 'get'
   })
   return data

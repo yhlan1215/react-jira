@@ -1,3 +1,2 @@
-export * from './UnauthPages'
+export * from './UnauthPage'
 export * from './login'
-export * from './register'

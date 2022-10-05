@@ -1,12 +1,12 @@
 import { Button, Row } from 'antd'
 import { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { List } from './List'
 import { SearchPanel } from './SearchPanel'
-import { clone, useDocumentTitle } from '../../../utils'
-import { useProject } from '../../../utils/useRequests'
-import { useUrlSearchParam } from '../../../utils/url'
 import { ProjectModal } from './ProjectModal'
-import { ScreenContainer } from '../../../components'
+import { useProject } from '../../utils/useRequests'
+import { useUrlSearchParam } from '../../utils/url'
+import { clone, useDocumentTitle } from '../../utils'
 
 export function ProjectList() {
   const { getProjects } = useProject()
@@ -16,6 +16,7 @@ export function ProjectList() {
   useDocumentTitle('项目列表')
   const [projectModalOpen, setProjectModalOpen] = useState(false)
   const [selectedId, setSelectedId] = useState('')
+  const { t } = useTranslation()
 
   useEffect(() => {
     getProjectsFromServer()
@@ -33,7 +34,7 @@ export function ProjectList() {
     }
 
     if (param.name) {
-      tempShownProjects = tempShownProjects.filter((project) => project.name.includes(param.name))
+      tempShownProjects = tempShownProjects.filter((project) => project.name.toLowerCase().includes(param.name.toLowerCase()))
     }
 
     setShownProjects(tempShownProjects)
@@ -58,15 +59,17 @@ export function ProjectList() {
   }
 
   return (
-    <ScreenContainer>
-      <h1>项目列表</h1>
-      <Row justify="space-between">
+    <div style={{ padding: '2rem' }}>
+      <h1>{t('projectList.title')}</h1>
+      <Row justify="space-between" align="bottom">
         <SearchPanel />
-        <Button onClick={() => {
-          setSelectedId('')
-          setProjectModalOpen(true)
-        }}
-        >新建项目
+        <Button
+          onClick={() => {
+            setSelectedId('')
+            setProjectModalOpen(true)
+          }}
+          style={{ marginBottom: '1rem' }}
+        >{t('projectList.createProject')}
         </Button>
       </Row>
       <List
@@ -81,6 +84,6 @@ export function ProjectList() {
         onClose={() => setProjectModalOpen(false)}
         onProjectSaved={getProjectsFromServer}
       />
-    </ScreenContainer>
+    </div>
   )
 }
