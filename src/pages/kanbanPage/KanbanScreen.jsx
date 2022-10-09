@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from 'antd'
+import { useTranslation } from 'react-i18next'
 import { useFlag } from '../../context'
 import { clone, useDocumentTitle } from '../../utils'
 import { useKanban, useProject, useTask } from '../../utils/useRequests'
@@ -36,6 +37,7 @@ export function KanbanScreen() {
   const { refreshKanbanScreenFlag } = useFlag()
   const { getProject } = useProject()
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
+  const { t } = useTranslation()
 
   const getKanbansFromServer = () => getKanbans(projectId)
     .then((data) => {
@@ -91,10 +93,10 @@ export function KanbanScreen() {
 
   return (
     <Container>
-      <h2>{project?.name}看板</h2>
+      <h2>{project?.name}{t('kanban.title')}</h2>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <SearchPanel />
-        <Button style={{ marginBottom: '1rem' }} onClick={onCreate}>新建任务</Button>
+        <Button style={{ marginBottom: '1rem' }} onClick={onCreate}>{t('kanban.newTask')}</Button>
       </div>
       <TaskModal
         isOpen={isTaskModalOpen}

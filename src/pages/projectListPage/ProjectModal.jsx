@@ -24,12 +24,12 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
           await postProject({ ...clonedProject, pin: false })
           onProjectSaved()
           onClose()
-          message.success(t('projectList.newSuccesss'))
+          message.success(t('common.newSuccess'))
         } else {
           await putProject(id, clonedProject)
           onProjectSaved()
           onClose()
-          message.success(t('projectList.editSuccess'))
+          message.success(t('common.editSuccess'))
         }
       })
   }
@@ -65,7 +65,8 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
     >
       <Container>
         <Form
-          labelCol={{ span: 9 }}
+          labelCol={{ span: 8 }}
+          wrapperCol={{ span: 16 }}
           ref={formRef}
         >
           <Form.Item
@@ -83,7 +84,7 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
             <Input />
           </Form.Item>
           <Form.Item
-            label={t('projectList.processor')}
+            label={t('common.processor')}
             name="personId"
           >
             <UserSelect />

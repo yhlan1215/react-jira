@@ -13,7 +13,12 @@
         "all":"全部",
         "high":"高",
         "medium":"中",
-        "low":"低"
+        "low":"低",
+        "processor":"负责人",
+        "type":"类型",
+        "editSuccess":"编辑成功",
+        "newSuccess":"新建成功",
+        "deleteSuccess":"删除成功"
     },    
     "header":{
         "chinese":"中文",
@@ -36,16 +41,26 @@
     "projectList":{
         "title":"项目列表",
         "projectName":"项目名",
-        "processor":"负责人",
         "createProject":"新建项目",
         "modalEditHeader":"编辑项目",
         "name":"名称",
         "organization":"项目组",
         "nameWarning":"请输入项目名",
         "organizationWarning":"请输入部门名",
-        "editSuccess":"编辑成功",
-        "newSuccess":"新建成功",
-        "deleteSuceess":"删除成功",
-        "deleteHeader":"确定要删除这个工程吗?"
+        "deleteProject":"确定要删除这个工程吗?"
+    },
+    "kanban":{
+        "title":"看板",
+        "newKanban":"新建看板名称",
+        "newTask":"新建任务",
+        "task":"任务",
+        "taskname":"任务名",
+        "name":"名称",
+        "priority":"优先级",
+        "point":"点数",
+        "state":"状态",
+        "processorFirstOption":"暂不指定",
+        "deleteKanban":"确定要删除这个看板吗?",
+        "deleteTask":"确定要删除这个任务吗?"
     }
 }

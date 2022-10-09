@@ -1,6 +1,7 @@
 import { Button, message, Popconfirm } from 'antd'
 import styled from 'styled-components'
 import { CloseOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
 import { TaskCard } from './TaskCard'
 import { useKanban } from '../../utils/useRequests'
 import { useFlag } from '../../context'
@@ -18,11 +19,12 @@ export const ColumnContainer = styled.div`
 export function KanbanColumn({ kanban }) {
   const { deleteKanban } = useKanban()
   const { refreshKanbanScreen } = useFlag()
+  const { t } = useTranslation()
 
   const onDelete = async () => {
     await deleteKanban(kanban.id)
     refreshKanbanScreen()
-    message.success('删除看板成功')
+    message.success(t('common.deleteSuceess'))
   }
 
   return (
@@ -32,9 +34,9 @@ export function KanbanColumn({ kanban }) {
         <div>
           { kanban.deletable && (
           <Popconfirm
-            title="确定要删除这个看板吗"
-            okText="确定"
-            cancelText="取消"
+            title={t('kanban.deleteKanban')}
+            okText={t('common.OK')}
+            cancelText={t('common.cancel')}
             onConfirm={() => onDelete(kanban.id)}
           >
             <Button type="link"><CloseOutlined /></Button>

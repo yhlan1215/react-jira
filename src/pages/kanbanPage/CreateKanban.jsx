@@ -1,5 +1,6 @@
 import { Input, message } from 'antd'
 import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useFlag } from '../../context'
 import { useKanban } from '../../utils/useRequests'
 import { ColumnContainer } from './KanbanColumn'
@@ -10,19 +11,20 @@ export function CreateKanban() {
   const projectId = useProjectIdInUrl()
   const { postKanban } = useKanban()
   const { refreshKanbanScreen } = useFlag()
+  const { t } = useTranslation()
 
   const submit = async () => {
     await postKanban({ name, projectId })
     setName('')
     refreshKanbanScreen()
-    message.success('新建看板成功')
+    message.success(t('common.newSucess'))
   }
 
   return (
     <ColumnContainer>
       <Input
         size="large"
-        placeholder="新建看板名称"
+        placeholder={t('kanban.newKanban')}
         value={name}
         onPressEnter={submit}
         onChange={(e) => setName(e.target.value)}

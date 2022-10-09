@@ -13,7 +13,12 @@
         "all":"All",
         "high":"High",
         "medium":"Medium",
-        "low":"Low"
+        "low":"Low",
+        "processor":"Processor",
+        "type":"Type",
+        "editSuccess":"Edit success",
+        "newSuccess":"New success",
+        "deleteSuccess":"Successfully delete"
     },    
     "header":{
         "chinese":"Chinese",
@@ -49,9 +54,19 @@
         "organization":"Organization",
         "nameWarning":"Please enter the project name",
         "organizationWarning":"Please enter the organization name",
-        "editSuccess":"Edit success",
-        "newSuccess":"New success",
-        "deleteSuceess":"Successfully delete",
-        "deleteHeader":"Are you sure you want to delete this project?"
+        "deleteProject":"Are you sure you want to delete this project?"
+    },
+    "kanban":{
+        "title":"Kanban",
+        "newKanban":"Create a new Kanban name",
+        "newTask":"New Task",
+        "task":"Task",
+        "taskname":"Task Name",
+        "priority":"Priority",
+        "point":"Point",
+        "state":"State",
+        "processorFirstOption":"Temporarily not specified",
+        "deleteKanban":"Are you sure you want to delete this kanban?",
+        "deleteTask":"Are you sure you want to delete this task?"
     }
 }

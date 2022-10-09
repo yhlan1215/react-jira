@@ -12,7 +12,7 @@ const FootrContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-content: center;
-  justify-content: space-between;
+  justify-content: end;
   width: 100%;
 `
 const PriorityContainer = styled.span`
@@ -41,10 +41,10 @@ export function TaskModal({ task, onClose, isOpen }) {
         const clonedTask = clone(formValue)
         if (!task.id) {
           await postTask({ ...clonedTask, projectId })
-          message.success('新建成功')
+          message.success(t('common.newSuccess'))
         } else {
           await putTask(task.id, clonedTask)
-          message.success('编辑成功')
+          message.success(t('common.editSuccess'))
         }
         refreshKanbanScreen()
         onClose()
@@ -54,26 +54,28 @@ export function TaskModal({ task, onClose, isOpen }) {
     await deleteTask(taskId)
     onClose()
     refreshKanbanScreen()
-    message.success('删除任务成功')
+    message.success(t('common.deleteSuceess'))
   }
 
   return (
     <Modal
-      title="创建事务"
+      title={t('kanban.newTask')}
       open={isOpen}
       onCancel={onClose}
       footer={(
         <FootrContainer>
+          {task.id && (
           <div>
             <Popconfirm
-              title="确定要删除这个任务吗"
-              okText="确定"
-              cancelText="取消"
+              title={t('kanban.deleteTask')}
+              okText={t('common.OK')}
+              cancelText={t('common.cancel')}
               onConfirm={() => onDelete(task.id)}
             >
               <Button type="link" danger>{t('common.delete')}</Button>
             </Popconfirm>
           </div>
+          )}
           <div>
             <Button style={{ marginRight: '1rem' }} onClick={onClose}>
               {t('common.cancel')}
@@ -90,21 +92,20 @@ export function TaskModal({ task, onClose, isOpen }) {
         wrapperCol={{ span: 12 }}
         ref={formRef}
       >
-        <Form.Item name="name" label="任务名">
+        <Form.Item name="name" label={t('kanban.taskname')}>
           <Input
             type="text"
-            placeholder="需要做些什么"
           />
         </Form.Item>
-        <Form.Item name="type" label="类型">
+        <Form.Item name="type" label={t('common.type')}>
           <TypeSelect />
         </Form.Item>
-        <Form.Item name="processorId" label="负责人">
+        <Form.Item name="processorId" label={t('common.processor')}>
           <UserSelect
-            firstOptionLabel="无负责人"
+            firstOptionLabel={t('kanban.processorFirstOption')}
           />
         </Form.Item>
-        <Form.Item name="priority" label="优先级">
+        <Form.Item name="priority" label={t('kanban.priority')}>
           <Select>
             <Select.Option value="high">
               <HighIcon />
@@ -120,10 +121,10 @@ export function TaskModal({ task, onClose, isOpen }) {
             </Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item name="point" label="点数">
+        <Form.Item name="point" label={t('kanban.point')}>
           <Input type="number" min={0} />
         </Form.Item>
-        <Form.Item name="kanbanId" label="状态">
+        <Form.Item name="kanbanId" label={t('kanban.state')}>
           <Select>
             {kanbans.map((kanban) => (
               <Select.Option

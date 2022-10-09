@@ -14,7 +14,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
   const onDelete = async (id) => {
     await deleteProject(id)
     onProjectDeleted()
-    message.success(t('projectList.deleteSuccess'))
+    message.success(t('common.deleteSuccess'))
   }
 
   return (
@@ -50,7 +50,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
           },
           {
             key: 'personId',
-            title: <div>{t('projectList.processor')}</div>,
+            title: <div>{t('common.processor')}</div>,
             render: (name, project) => (
               <div>
                 {users?.find((user) => user.id === project.personId)?.name || '未知'}
@@ -74,7 +74,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
                   </Menu.Item>
                   <Menu.Item key="delete">
                     <Popconfirm
-                      title={t('projectList.deleteHeader')}
+                      title={t('projectList.deleteProject')}
                       okText={t('common.OK')}
                       cancelText={t('common.cancel')}
                       onConfirm={() => onDelete(project.id)}

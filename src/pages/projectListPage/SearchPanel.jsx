@@ -23,7 +23,7 @@ export function SearchPanel() {
         />
       </SearchContainer>
 
-      <SearchContainer label={t('projectList.processor')}>
+      <SearchContainer label={t('common.processor')}>
         <UserSelect
           value={param.personId || ''}
           firstOptionLabel={t('common.all')}

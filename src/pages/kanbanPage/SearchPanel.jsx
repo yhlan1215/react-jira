@@ -1,4 +1,5 @@
 import { Input } from 'antd'
+import { t } from 'i18next'
 import { FilterBar, UserSelect, SearchContainer, TypeSelect } from '../../components'
 import { useUrlSearchParam } from '../../utils/url'
 
@@ -10,9 +11,8 @@ export function SearchPanel() {
 
   return (
     <FilterBar onClear={reset}>
-      <SearchContainer label="任务">
+      <SearchContainer label={t('kanban.taskname')}>
         <Input
-          placeholder="任务名"
           type="text"
           value={param.name}
           onChange={(e) => {
@@ -23,10 +23,10 @@ export function SearchPanel() {
         />
       </SearchContainer>
 
-      <SearchContainer label="负责人">
+      <SearchContainer label={t('common.processor')}>
         <UserSelect
           value={param.processorId || ''}
-          firstOptionLabel="所有"
+          firstOptionLabel={t('common.all')}
           onChange={(value) => {
             setParam({
               processorId: value
@@ -35,9 +35,9 @@ export function SearchPanel() {
         />
       </SearchContainer>
 
-      <SearchContainer label="类型">
+      <SearchContainer label={t('common.type')}>
         <TypeSelect
-          firstOptionLabel="所有"
+          firstOptionLabel={t('common.all')}
           value={param.type || ''}
           onChange={(value) => {
             setParam({
