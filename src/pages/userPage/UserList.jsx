@@ -1,6 +1,5 @@
-import { Divider, List } from 'antd'
+import { Avatar, Divider, List } from 'antd'
 import styled from 'styled-components'
-import { UserOutlined } from '@ant-design/icons'
 import { useSetting } from '../../context/SettingContext'
 
 const Container = styled.div`
@@ -18,7 +17,7 @@ export function UserList() {
         dataSource={users}
         renderItem={(item) => (
           <List.Item>
-            <UserOutlined style={{ marginRight: '1rem' }} />
+            <Avatar size={64} src={item.picture} style={{ marginRight: '2rem' }} />
             {item.name}
             <Divider />
           </List.Item>

@@ -1,5 +1,5 @@
 import { EllipsisOutlined } from '@ant-design/icons'
-import { Dropdown, Menu, Table, Button, message, Popconfirm } from 'antd'
+import { Dropdown, Menu, Table, Button, message, Popconfirm, Avatar } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { Pin } from '../../components'
@@ -38,25 +38,30 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
             )
           },
           {
+            align: 'center',
             key: 'name',
             title: <div>{t('common.name')}</div>,
             dataIndex: 'name',
             render: (value, project) => <Link to={`/projects/${project.id}/kanban`}>{value}</Link>
           },
           {
+            align: 'center',
             key: 'organization',
             title: <div>{t('projectList.organization')}</div>,
             dataIndex: 'organization'
           },
           {
+            align: 'center',
             key: 'personId',
             title: <div>{t('common.processor')}</div>,
             render: (name, project) => (
               <div>
+                <Avatar src={users?.find((user) => user.id === project.personId)?.picture} style={{ marginRight: '1rem' }} />
                 {users?.find((user) => user.id === project.personId)?.name || '未知'}
               </div>
             ) },
           {
+            align: 'center',
             key: 'action',
             title: <div>{t('common.action')}</div>,
             render: (value, project) => (

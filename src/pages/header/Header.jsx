@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Dropdown, Image, Menu } from 'antd'
+import { Avatar, Button, Dropdown, Image, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { LogoutOutlined, TranslationOutlined } from '@ant-design/icons'
@@ -92,7 +92,12 @@ export function Header() {
           </Menu>
           )}
         >
-          <Button type="link" onClick={(e) => e.preventDefault}>Hi,{user?.name}</Button>
+          <Button type="link" onClick={(e) => e.preventDefault}>
+            <div>
+              {user?.name}
+              <Avatar src={user?.picture} style={{ marginLeft: '1rem' }} />
+            </div>
+          </Button>
         </Dropdown>
       </div>
     </Container>

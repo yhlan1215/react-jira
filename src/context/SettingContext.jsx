@@ -20,8 +20,10 @@ export function SettingProvider({ children }) {
   }, [user])
 
   useEffect(() => {
-    localStorage.setItem('language', language)
-    i18n.changeLanguage(language)
+    if (language) {
+      localStorage.setItem('language', language)
+      i18n.changeLanguage(language)
+    }
   }, [language])
 
   return (

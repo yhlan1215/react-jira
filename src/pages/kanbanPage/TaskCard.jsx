@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Card } from 'antd'
+import { Avatar, Card } from 'antd'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { BugIcon, HighIcon, LowIcon, MediumIcon, TaskIcon } from '../../components'
@@ -50,7 +50,7 @@ export function TaskCard({ task, onDelete }) {
                   ? <MediumIcon /> : <LowIcon /> }
               <div>{task.point}</div>
             </LeftContainer>
-            <div>{users.find((user) => user.id === task.processorId)?.name }</div>
+            <Avatar size="small" src={users.find((user) => user.id === task.processorId)?.picture} />
           </FooterContainer>
         </div>
       </Card>
