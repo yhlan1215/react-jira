@@ -24,7 +24,7 @@ export function KanbanColumn({ kanban }) {
   const onDelete = async () => {
     await deleteKanban(kanban.id)
     refreshKanbanScreen()
-    message.success(t('common.deleteSuceess'))
+    message.success(t('common.deleteSuccess'))
   }
 
   return (

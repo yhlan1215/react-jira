@@ -17,7 +17,7 @@ export function CreateKanban() {
     await postKanban({ name, projectId })
     setName('')
     refreshKanbanScreen()
-    message.success(t('common.newSucess'))
+    message.success(t('common.newSuccess'))
   }
 
   return (

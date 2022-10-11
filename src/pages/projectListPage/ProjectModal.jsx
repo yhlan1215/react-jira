@@ -65,12 +65,12 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
     >
       <Container>
         <Form
-          labelCol={{ span: 8 }}
+          labelCol={{ span: 9 }}
           wrapperCol={{ span: 16 }}
           ref={formRef}
         >
           <Form.Item
-            label={t('projectList.name')}
+            label={t('common.name')}
             name="name"
             rules={[{ required: true, message: t('projectList.nameWarning') }]}
           >

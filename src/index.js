@@ -10,11 +10,11 @@ import './i18n/configs'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <AppProviders>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AppProviders>
       <App />
-    </BrowserRouter>
-  </AppProviders>
+    </AppProviders>
+  </BrowserRouter>
 )
 
 // If you want to start measuring performance in your app, pass a function

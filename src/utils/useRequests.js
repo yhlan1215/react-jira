@@ -1,6 +1,24 @@
 import axios from './Axios'
 
 //----------------------------------------------------------
+// Auth
+//----------------------------------------------------------
+
+const login = async (username, password) => {
+  const { data } = await axios.request({
+    url: '/auth',
+    method: 'post',
+    auth: {
+      username,
+      password
+    }
+  })
+  return data
+}
+
+export const useAuth = () => ({ login })
+
+//----------------------------------------------------------
 // Project
 //----------------------------------------------------------
 const getProjects = async () => {

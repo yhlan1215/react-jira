@@ -39,7 +39,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
           },
           {
             key: 'name',
-            title: <div>{t('projectList.name')}</div>,
+            title: <div>{t('common.name')}</div>,
             dataIndex: 'name',
             render: (value, project) => <Link to={`/projects/${project.id}/kanban`}>{value}</Link>
           },

@@ -1,19 +1,23 @@
 import React, { useState, useEffect, useContext } from 'react'
 import i18n from '../i18n/configs'
 import { useUser } from '../utils/useRequests'
+import { useAuthContext } from './AuthContext'
 
 const SettingContext = React.createContext(undefined)
 SettingContext.displayName = 'SettingContext'
 
 export function SettingProvider({ children }) {
+  const { user } = useAuthContext()
   const [users, setUsers] = useState([])
   const { getUsers } = useUser()
   const [language, setLanguage] = useState('')
 
   useEffect(() => {
-    getUsers().then(setUsers)
-    setLanguage(localStorage.getItem('language') || 'zh')
-  }, [])
+    if (user) {
+      getUsers().then(setUsers)
+      setLanguage(localStorage.getItem('language') || 'zh')
+    }
+  }, [user])
 
   useEffect(() => {
     localStorage.setItem('language', language)

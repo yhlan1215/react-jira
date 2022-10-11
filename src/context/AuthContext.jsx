@@ -1,40 +1,41 @@
-import React, { useState } from 'react'
-import * as auth from '../auth-provider'
-import { useMount } from '../utils'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../utils/useRequests'
 
 const AuthContext = React.createContext(undefined)
 AuthContext.displayName = 'AuthContext'
 
-const bootstrapUser = async () => {
-  let user = null
-  const token = auth.getToken()
-  if (token) {
-    const data = await fetch('me', { token })
-    user = data.user
-  }
-  return user
-}
-
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null)
+  const { login } = useAuth()
+  const [user, setUser] = useState(undefined)
+  const nav = useNavigate()
 
-  useMount(() => {
-    bootstrapUser().then(setUser)
-  })
+  useEffect(() => {
+    const a = JSON.parse(localStorage.getItem('user'))
+    setUser(a)
+  }, [])
 
-  const login = (form) => auth.login(form).then(setUser)
-  const register = (form) => auth.register(form).then(setUser)
-  const logout = () => auth.logout().then(() => setUser(null))
+  const signIn = async ({ username, password }) => {
+    const { user } = await login(username, password)
+    setUser(user)
+    localStorage.setItem('user', JSON.stringify(user))
+  }
+
+  const logout = () => {
+    document.cookie = "jwt=''"
+    nav('./login')
+    localStorage.removeItem('user')
+  }
 
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, signIn, logout }}>
       {children}
     </AuthContext.Provider>
   )
 }
 
-export const useAuth = () => {
+export const useAuthContext = () => {
   const context = React.useContext(AuthContext)
   if (!context) {
     throw new Error('useAuth必须在AuthProvider中使用')

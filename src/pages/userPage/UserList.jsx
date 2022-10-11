@@ -1,8 +1,7 @@
 import { Divider, List } from 'antd'
-import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { UserOutlined } from '@ant-design/icons'
-import { useUser } from '../../utils/useRequests'
+import { useSetting } from '../../context/SettingContext'
 
 const Container = styled.div`
   display: flex;
@@ -11,11 +10,7 @@ const Container = styled.div`
 `
 
 export function UserList() {
-  const { getUsers } = useUser()
-  const [users, setUsers] = useState([])
-  useEffect(() => {
-    getUsers().then(setUsers)
-  }, [])
+  const { users } = useSetting()
 
   return (
     <Container>

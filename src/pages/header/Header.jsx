@@ -5,8 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { TranslationOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import softwareLogo from '../../assets/jira.png'
-import { useAuth, useSetting } from '../../context'
-import { resetRoute } from '../../utils'
+import { useAuthContext, useSetting } from '../../context'
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ const HeaderLeft = styled.div`
 `
 
 export function Header() {
-  const { logout, user } = useAuth()
+  const { logout, user } = useAuthContext()
   const [selectedKey, setSelectedKey] = useState('')
   const location = useLocation()
   const nav = useNavigate()
@@ -40,7 +39,7 @@ export function Header() {
   return (
     <Container>
       <HeaderLeft>
-        <Button type="link" onClick={resetRoute}>
+        <Button type="link" onClick={() => { nav('/projects') }}>
           <Image
             src={softwareLogo}
             height="5rem"
@@ -94,7 +93,7 @@ export function Header() {
           </Menu>
           )}
         >
-          <Button type="link" onClick={(e) => e.preventDefault}>Hi,{user?.name}你猜</Button>
+          <Button type="link" onClick={(e) => e.preventDefault}>Hi,{user?.name}</Button>
         </Dropdown>
       </div>
     </Container>

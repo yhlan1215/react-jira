@@ -1,5 +1,6 @@
 {   
     "common":{
+        "name":"Name",
         "project":"Project",
         "user":"User",
         "reset":"Reset",
@@ -19,35 +20,30 @@
         "editSuccess":"Edit success",
         "newSuccess":"New success",
         "deleteSuccess":"Successfully delete"
-    },    
+    },
+    "error":{
+        "networkError":"网络错误",
+        "timeoutError":"超时错误"
+    },     
     "header":{
         "chinese":"Chinese",
         "english":"English",
         "logout":"Logout"
     },
-    "loginPage": {
-        "title": "Please log in",
+      "loginPage": {
+        "title": "Please login",
         "login": "Login",
-        "signUpMessage":"Don't have an account? Sign up for a new account",
-        "userName":"username",
+        "username":"Username",
         "password":"Password",
-        "userNameWarning":"Please input your username",
-        "passwordWarning":"Please input your password"
+        "userNameWarning":"Please enter your username",
+        "passwordWarning":"Please enter your password",
+        "loginError":"The username or password is incorrect",
+        "loginAgain":"Please login again.",
+        "loginSuccessfully":"Login successfully"
     },
-    "registerPage": {
-        "title": "Please register",
-        "register": "Register",
-        "loginMessage":"You already have an account? Direct login",
-        "userName":"Username",
-        "password":"Password",
-        "confirmPassword":"Please confirm the password",
-        "userNameWarning":"Please input your username",
-        "passwordWarning":"Please input your password"
-    }, 
     "projectList":{
         "title":"Project List",
         "projectName":"Project Name",
-        "processor":"Processor",
         "createProject":"New Project",
         "modalEditHeader":"Edit Project",
         "name":"Name",

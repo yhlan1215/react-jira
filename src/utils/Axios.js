@@ -1,7 +1,8 @@
 import axios from 'axios'
 import ReactDOM from 'react-dom'
 import { Spin, message } from 'antd'
-// import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from 'history'
+import i18n from '../i18n/configs'
 
 const Axios = axios.create({
   baseURL: 'http://localhost:8080',
@@ -41,19 +42,19 @@ Axios.interceptors.response.use((res) => {
   return res
 }, (err) => {
   if (err.message === 'Network Error') {
-    message.error('Network error.')
-    err.showed = true
+    message.error(i18n.t('error.networkError'))
   }
   if (err.code === 'ECONNABORTED') {
-    message.error('Timeout error.')
-    err.showed = true
+    message.error(i18n.t('error.timeOutError'))
   }
-  // if (err?.response?.status === 401) {
-  //   createBrowserHistory().replace('/signIn')
-  //   window.location.reload()
-  //   message.error(i18n.t('msg.authFailedError'))
-  //   err.showed = true
-  // }
+  if (err?.response?.status === 401) {
+    if (!err.request.responseURL.endsWith('/auth')) {
+      createBrowserHistory().replace('/login#sessionTimeout')
+      window.location.reload()
+    } else {
+      message.error(i18n.t('loginPage.loginError'))
+    }
+  }
 
   hideLoading()
   return Promise.reject(err)

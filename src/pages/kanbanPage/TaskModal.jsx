@@ -54,7 +54,7 @@ export function TaskModal({ task, onClose, isOpen }) {
     await deleteTask(taskId)
     onClose()
     refreshKanbanScreen()
-    message.success(t('common.deleteSuceess'))
+    message.success(t('common.deleteSuccess'))
   }
 
   return (

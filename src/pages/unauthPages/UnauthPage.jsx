@@ -1,5 +1,6 @@
 import { Button, Card } from 'antd'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 import { LoginScreen } from '.'
 import logo from '../../assets/logo.svg'
 import left from '../../assets/left.svg'
@@ -53,13 +54,14 @@ const Container = styled.div`
 `
 
 export function UnauthPage() {
+  const { t } = useTranslation()
   useDocumentTitle('jira任务管理系统')
   return (
     <Container>
       <Header />
       <Background />
       <ShadowCard>
-        <Title>请登录</Title>
+        <Title>{t('loginPage.title')}</Title>
         <LoginScreen />
       </ShadowCard>
     </Container>

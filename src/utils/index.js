@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const cleanObject = (object) => {
   const isFalsy = (value) => (value === 0 ? true : !value)
@@ -14,12 +14,6 @@ export const cleanObject = (object) => {
   return result
 }
 
-export const useMount = (callback) => {
-  useEffect(() => {
-    callback()
-  }, [])
-}
-
 export const useDebounce = (value, delay) => {
   const [debouncedVale, setDebouncedValue] = useState(value)
 
@@ -30,24 +24,10 @@ export const useDebounce = (value, delay) => {
   return debouncedVale
 }
 
-export const resetRoute = () => { window.location.href = window.location.origin }
-
 export const useDocumentTitle = (title) => {
   useEffect(() => {
     document.title = title
   }, [title])
-}
-
-export const useMountedRef = () => {
-  const mountedRef = useRef(false)
-
-  useEffect(() => {
-    mountedRef.current = true
-    return () => {
-      mountedRef.current = false
-    }
-  }, [])
-  return mountedRef
 }
 
 export const clone = (data) => JSON.parse(JSON.stringify(data))

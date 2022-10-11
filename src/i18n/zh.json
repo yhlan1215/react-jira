@@ -1,5 +1,6 @@
 {   
     "common":{
+        "name":"名称",
         "project":"项目",
         "user":"用户",
         "reset":"重置",
@@ -19,31 +20,32 @@
         "editSuccess":"编辑成功",
         "newSuccess":"新建成功",
         "deleteSuccess":"删除成功"
-    },    
+    },
+    "error":{
+        "networkError":"网络错误",
+        "timeoutError":"超时错误"
+    }, 
     "header":{
         "chinese":"中文",
         "english":"英语",
         "logout":"登出"
     },
-    "unAuthPage": {
-        "LoginTitle": "请登录",
-        "RegisterTitle": "请注册",
+    "loginPage": {
+        "title": "请登录",
         "login": "登录",
-        "register": "注册",
-        "signUpMessage":"没有账号？注册新账号",
-        "loginMessage":"已经有账号了？直接登录",
-        "userName":"用户名",
+        "username":"用户名",
         "password":"密码",
         "userNameWarning":"请输入用户名",
         "passwordWarning":"请输入密码",
-        "confirmPassword":"请确认密码"
+        "loginError":"用户名或密码错误",
+        "loginAgain":"请重新登录",
+        "loginSuccessfully":"登录成功"
     },
     "projectList":{
         "title":"项目列表",
         "projectName":"项目名",
         "createProject":"新建项目",
         "modalEditHeader":"编辑项目",
-        "name":"名称",
         "organization":"项目组",
         "nameWarning":"请输入项目名",
         "organizationWarning":"请输入部门名",
@@ -55,7 +57,6 @@
         "newTask":"新建任务",
         "task":"任务",
         "taskname":"任务名",
-        "name":"名称",
         "priority":"优先级",
         "point":"点数",
         "state":"状态",
