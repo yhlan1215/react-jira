@@ -1,3 +1,4 @@
+import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { Divider, Form, Input, message } from 'antd'
 import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +24,7 @@ export function LoginScreen() {
     }
   }, [])
 
-  const handleClick = () => {
+  const handleSubmit = () => {
     formRef.current.validateFields()
       .then(signIn)
       .then(() => nav('/projects'))
@@ -33,14 +34,36 @@ export function LoginScreen() {
     <Form
       ref={formRef}
     >
-      <Form.Item name="username" rules={[{ required: true, message: t('loginPage.userNameWarning') }]}>
-        <Input placeholder={t('loginPage.username')} type="text" id="username" />
+      <Form.Item
+        name="username"
+        rules={[{ required: true, message: t('loginPage.userNameWarning') }]}
+      >
+        <Input
+          onPressEnter={handleSubmit}
+          prefix={<UserOutlined />}
+          placeholder={t('loginPage.username')}
+          type="text"
+          id="username"
+        />
       </Form.Item>
-      <Form.Item name="password" rules={[{ required: true, message: t('loginPage.passwordWarning') }]}>
-        <Input.Password placeholder={t('loginPage.password')} id="password" />
+      <Form.Item
+        name="password"
+        rules={[{ required: true, message: t('loginPage.passwordWarning') }]}
+      >
+        <Input.Password
+          onPressEnter={handleSubmit}
+          prefix={<LockOutlined />}
+          placeholder={t('loginPage.password')}
+          id="password"
+        />
       </Form.Item>
       <Divider />
-      <LongButton onClick={handleClick} type="primary">{t('loginPage.login')}</LongButton>
+      <LongButton
+        onClick={handleSubmit}
+        type="primary"
+      >
+        {t('loginPage.login')}
+      </LongButton>
     </Form>
   )
 }

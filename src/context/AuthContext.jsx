@@ -1,4 +1,6 @@
+import { message } from 'antd'
 import React, { useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../utils/useRequests'
 
@@ -9,6 +11,7 @@ export function AuthProvider({ children }) {
   const { login } = useAuth()
   const [user, setUser] = useState(undefined)
   const nav = useNavigate()
+  const { t } = useTranslation()
 
   useEffect(() => {
     const a = JSON.parse(localStorage.getItem('user'))
@@ -19,12 +22,14 @@ export function AuthProvider({ children }) {
     const { user } = await login(username, password)
     setUser(user)
     localStorage.setItem('user', JSON.stringify(user))
+    message.success(t('loginPage.loginSuccessfully'))
   }
 
   const logout = () => {
-    document.cookie = "jwt=''"
+    document.cookie = 'jwt=; Max-Age=-99999999;'
     nav('./login')
     localStorage.removeItem('user')
+    message.success(t('loginPage.LoggingOutSuccessfully'))
   }
 
   return (

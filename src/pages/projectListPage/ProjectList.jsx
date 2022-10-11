@@ -1,6 +1,7 @@
 import { Button, Row } from 'antd'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
+import { EditOutlined } from '@ant-design/icons'
 import { List } from './List'
 import { SearchPanel } from './SearchPanel'
 import { ProjectModal } from './ProjectModal'
@@ -59,7 +60,7 @@ export function ProjectList() {
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
+    <div style={{ padding: '3rem' }}>
       <h1>{t('projectList.title')}</h1>
       <Row justify="space-between" align="bottom">
         <SearchPanel />
@@ -69,7 +70,7 @@ export function ProjectList() {
             setProjectModalOpen(true)
           }}
           style={{ marginBottom: '1rem' }}
-        >{t('projectList.createProject')}
+        ><EditOutlined />{t('projectList.createProject')}
         </Button>
       </Row>
       <List

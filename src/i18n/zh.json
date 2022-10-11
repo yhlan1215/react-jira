@@ -39,7 +39,8 @@
         "passwordWarning":"请输入密码",
         "loginError":"用户名或密码错误",
         "loginAgain":"请重新登录",
-        "loginSuccessfully":"登录成功"
+        "loginSuccessfully":"登录成功",
+        "LoggingOutSuccessfully":"退出登录成功"
     },
     "projectList":{
         "title":"项目列表",

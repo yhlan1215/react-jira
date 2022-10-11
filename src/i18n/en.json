@@ -39,7 +39,8 @@
         "passwordWarning":"Please enter your password",
         "loginError":"The username or password is incorrect",
         "loginAgain":"Please login again.",
-        "loginSuccessfully":"Login successfully"
+        "loginSuccessfully":"Login successfully",
+        "LoggingOutSuccessfully":"Logging Out Successfully"
     },
     "projectList":{
         "title":"Project List",

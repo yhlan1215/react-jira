@@ -1,3 +1,4 @@
+import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 import { t } from 'i18next'
 import { FilterBar, UserSelect, SearchContainer } from '../../components'
@@ -13,7 +14,7 @@ export function SearchPanel() {
     <FilterBar onClear={reset}>
       <SearchContainer label={t('projectList.projectName')}>
         <Input
-          type="text"
+          prefix={<SearchOutlined />}
           value={param.name}
           onChange={(e) => {
             setParam({

@@ -1,3 +1,4 @@
+import { SearchOutlined } from '@ant-design/icons'
 import { Input } from 'antd'
 import { t } from 'i18next'
 import { FilterBar, UserSelect, SearchContainer, TypeSelect } from '../../components'
@@ -13,6 +14,7 @@ export function SearchPanel() {
     <FilterBar onClear={reset}>
       <SearchContainer label={t('kanban.taskname')}>
         <Input
+          prefix={<SearchOutlined />}
           type="text"
           value={param.name}
           onChange={(e) => {

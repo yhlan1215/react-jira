@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
+import { EditOutlined } from '@ant-design/icons'
 import { useFlag } from '../../context'
 import { clone, useDocumentTitle } from '../../utils'
 import { useKanban, useProject, useTask } from '../../utils/useRequests'
@@ -96,7 +97,7 @@ export function KanbanScreen() {
       <h2>{project?.name}{t('kanban.title')}</h2>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
         <SearchPanel />
-        <Button style={{ marginBottom: '1rem' }} onClick={onCreate}>{t('kanban.newTask')}</Button>
+        <Button style={{ marginBottom: '1rem' }} onClick={onCreate}><EditOutlined />{t('kanban.newTask')}</Button>
       </div>
       <TaskModal
         isOpen={isTaskModalOpen}

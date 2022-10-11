@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Button, Dropdown, Image, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { TranslationOutlined } from '@ant-design/icons'
+import { LogoutOutlined, TranslationOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import softwareLogo from '../../assets/jira.png'
 import { useAuthContext, useSetting } from '../../context'
@@ -47,7 +47,6 @@ export function Header() {
             preview={false}
           />
         </Button>
-
         <Menu
           theme="dark"
           mode="horizontal"
@@ -88,7 +87,7 @@ export function Header() {
         <Dropdown overlay={(
           <Menu>
             <Menu.Item key="logout">
-              <Button type="link" onClick={logout}>{t('header.logout')}</Button>
+              <Button type="link" onClick={logout}><LogoutOutlined />{t('header.logout')}</Button>
             </Menu.Item>
           </Menu>
           )}
