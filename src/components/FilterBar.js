@@ -2,7 +2,7 @@ import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 
-export const Container = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-end;

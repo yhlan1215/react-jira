@@ -22,8 +22,8 @@
         "deleteSuccess":"Successfully delete"
     },
     "error":{
-        "networkError":"网络错误",
-        "timeoutError":"超时错误"
+        "networkError":"Network Error",
+        "timeoutError":"Timeout Error"
     },     
     "header":{
         "chinese":"Chinese",
@@ -51,7 +51,8 @@
         "organization":"Organization",
         "nameWarning":"Please enter the project name",
         "organizationWarning":"Please enter the organization name",
-        "deleteProject":"Are you sure you want to delete this project?"
+        "deleteProject":"Are you sure you want to delete this project?",
+        "unKnown":"unKnown"
     },
     "kanban":{
         "title":"Kanban",
@@ -65,5 +66,8 @@
         "processorFirstOption":"Temporarily not specified",
         "deleteKanban":"Are you sure you want to delete this kanban?",
         "deleteTask":"Are you sure you want to delete this task?"
+    },
+    "userList":{
+        "title":"Users List"
     }
 }

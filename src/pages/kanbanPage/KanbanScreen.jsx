@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Button } from 'antd'
 import { useTranslation } from 'react-i18next'
-import { EditOutlined } from '@ant-design/icons'
+import { PlusSquareOutlined } from '@ant-design/icons'
+import { DragDropContext } from 'react-beautiful-dnd'
 import { useFlag } from '../../context'
 import { clone, useDocumentTitle } from '../../utils'
 import { useKanban, useProject, useTask } from '../../utils/useRequests'
@@ -19,6 +20,12 @@ const Container = styled.div`
     flex-direction: column;
     overflow: scroll;
     height: 100%;
+`
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
 `
 const KanbanContainer = styled.div`
     display: flex;
@@ -39,6 +46,8 @@ export function KanbanScreen() {
   const { getProject } = useProject()
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false)
   const { t } = useTranslation()
+  const { putTask } = useTask()
+  const [dropDisabledState, setDropDisabledState] = useState('')
 
   const getKanbansFromServer = () => getKanbans(projectId)
     .then((data) => {
@@ -92,29 +101,56 @@ export function KanbanScreen() {
     setIsTaskModalOpen(true)
   }
 
+  const onDragStart = (start) => {
+    setDropDisabledState(start.source.droppableId)
+  }
+
+  const onDragEnd = async (a) => {
+    setDropDisabledState('')
+    if (!a.destination) {
+      return
+    }
+    // const sourceKanban = shownKanbans.find((shownKanban) => shownKanban.id === a.source.droppableId)
+    // const tempTask = sourceKanban.tasks.splice(a.source.index, 1)
+    // const destinationKanban = shownKanbans.find((shownKanban) => shownKanban.id === a.destination.droppableId)
+    // destinationKanban.tasks.splice(a.destination.index, 0, tempTask)
+    const clonedTasks = clone(tasks)
+    clonedTasks.find((task) => task.id === a.draggableId).kanbanId = a.destination.droppableId
+    setTasks(clonedTasks)
+    await putTask(a.draggableId, { kanbanId: a.destination.droppableId })
+    getTasksFromServer()
+  }
+
   return (
-    <Container>
-      <h2>{project?.name}{t('kanban.title')}</h2>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
-        <SearchPanel />
-        <Button style={{ marginBottom: '1rem' }} onClick={onCreate}><EditOutlined />{t('kanban.newTask')}</Button>
-      </div>
-      <TaskModal
-        isOpen={isTaskModalOpen}
-        task={{
-          name: '',
-          type: 'task',
-          processorId: '',
-          priority: '',
-          point: '0',
-          kanbanId: kanbans?.[0]?.id
-        }}
-        onClose={() => setIsTaskModalOpen(false)}
-      />
-      <KanbanContainer>
-        {shownKanbans?.map((shownKanban) => <KanbanColumn kanban={shownKanban} key={shownKanban.id} />)}
-        <CreateKanban />
-      </KanbanContainer>
-    </Container>
+    <DragDropContext onDragStart={onDragStart} onDragEnd={onDragEnd}>
+      <Container>
+        <h2>{project?.name}{t('kanban.title')}</h2>
+        <HeaderContainer>
+          <SearchPanel />
+          <Button
+            type="primary"
+            style={{ marginBottom: '1rem' }}
+            onClick={onCreate}
+          ><PlusSquareOutlined />{t('kanban.newTask')}
+          </Button>
+        </HeaderContainer>
+        <TaskModal
+          isOpen={isTaskModalOpen}
+          task={{
+            name: '',
+            type: 'task',
+            processorId: '',
+            priority: '',
+            point: '0',
+            kanbanId: kanbans?.[0]?.id
+          }}
+          onClose={() => setIsTaskModalOpen(false)}
+        />
+        <KanbanContainer>
+          {shownKanbans?.map((shownKanban) => <KanbanColumn dropDisabledState={dropDisabledState} kanban={shownKanban} key={shownKanban.id} />)}
+          <CreateKanban />
+        </KanbanContainer>
+      </Container>
+    </DragDropContext>
   )
 }

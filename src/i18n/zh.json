@@ -28,7 +28,7 @@
     "header":{
         "chinese":"中文",
         "english":"英语",
-        "logout":"登出"
+        "logout":"退出"
     },
     "loginPage": {
         "title": "请登录",
@@ -50,7 +50,8 @@
         "organization":"项目组",
         "nameWarning":"请输入项目名",
         "organizationWarning":"请输入部门名",
-        "deleteProject":"确定要删除这个工程吗?"
+        "deleteProject":"确定要删除这个工程吗?",
+        "unKnown":"未知"
     },
     "kanban":{
         "title":"看板",
@@ -61,8 +62,11 @@
         "priority":"优先级",
         "point":"点数",
         "state":"状态",
-        "processorFirstOption":"暂不指定",
+        "processorFirstOption":"暂未指定",
         "deleteKanban":"确定要删除这个看板吗?",
         "deleteTask":"确定要删除这个任务吗?"
+    },
+    "userList":{
+        "title":"用户列表"
     }
 }

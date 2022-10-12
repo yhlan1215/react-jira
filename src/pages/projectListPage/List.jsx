@@ -1,4 +1,4 @@
-import { EllipsisOutlined } from '@ant-design/icons'
+import { EllipsisOutlined, FormOutlined, DeleteOutlined } from '@ant-design/icons'
 import { Dropdown, Menu, Table, Button, message, Popconfirm, Avatar } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
@@ -57,7 +57,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
             render: (name, project) => (
               <div>
                 <Avatar src={users?.find((user) => user.id === project.personId)?.picture} style={{ marginRight: '1rem' }} />
-                {users?.find((user) => user.id === project.personId)?.name || '未知'}
+                {users?.find((user) => user.id === project.personId)?.name || t('projectList.unKnown')}
               </div>
             ) },
           {
@@ -74,7 +74,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
                         onEdit(project.id)
                       }}
                     >
-                      {t('common.edit')}
+                      <FormOutlined />{t('common.edit')}
                     </Button>
                   </Menu.Item>
                   <Menu.Item key="delete">
@@ -84,7 +84,7 @@ export function List({ onPin, onProjectDeleted, onEdit, ...props }) {
                       cancelText={t('common.cancel')}
                       onConfirm={() => onDelete(project.id)}
                     >
-                      <Button type="link">{t('common.delete')}</Button>
+                      <Button type="link"><DeleteOutlined />{t('common.delete')}</Button>
                     </Popconfirm>
                   </Menu.Item>
                 </Menu>

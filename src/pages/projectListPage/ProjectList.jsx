@@ -1,13 +1,21 @@
-import { Button, Row } from 'antd'
+import { Button } from 'antd'
 import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EditOutlined } from '@ant-design/icons'
+import { PlusSquareOutlined } from '@ant-design/icons'
+import styled from 'styled-components'
 import { List } from './List'
 import { SearchPanel } from './SearchPanel'
 import { ProjectModal } from './ProjectModal'
 import { useProject } from '../../utils/useRequests'
 import { useUrlSearchParam } from '../../utils/url'
 import { clone, useDocumentTitle } from '../../utils'
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+`
 
 export function ProjectList() {
   const { getProjects } = useProject()
@@ -62,17 +70,19 @@ export function ProjectList() {
   return (
     <div style={{ padding: '3rem' }}>
       <h1>{t('projectList.title')}</h1>
-      <Row justify="space-between" align="bottom">
+      <Container>
         <SearchPanel />
         <Button
+          type="primary"
           onClick={() => {
             setSelectedId('')
             setProjectModalOpen(true)
           }}
           style={{ marginBottom: '1rem' }}
-        ><EditOutlined />{t('projectList.createProject')}
+        >
+          <PlusSquareOutlined />{t('projectList.createProject')}
         </Button>
-      </Row>
+      </Container>
       <List
         dataSource={shownProjects}
         onPin={onPin}

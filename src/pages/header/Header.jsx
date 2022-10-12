@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Avatar, Button, Dropdown, Image, Menu } from 'antd'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { LogoutOutlined, TranslationOutlined } from '@ant-design/icons'
+import { PoweroffOutlined, TranslationOutlined } from '@ant-design/icons'
 import { useTranslation } from 'react-i18next'
 import softwareLogo from '../../assets/jira.png'
 import { useAuthContext, useSetting } from '../../context'
@@ -39,14 +39,12 @@ export function Header() {
   return (
     <Container>
       <HeaderLeft>
-        <Button type="link" onClick={() => { nav('/projects') }}>
-          <Image
-            src={softwareLogo}
-            height="5rem"
-            width="5rem"
-            preview={false}
-          />
-        </Button>
+        <Image
+          src={softwareLogo}
+          height="5rem"
+          width="5rem"
+          preview={false}
+        />
         <Menu
           theme="dark"
           mode="horizontal"
@@ -72,7 +70,7 @@ export function Header() {
           }}
         />
       </HeaderLeft>
-      <div>
+      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
         <Dropdown
           placement="bottomRight"
           overlay={(
@@ -82,22 +80,17 @@ export function Header() {
             </Menu>
           )}
         >
-          <TranslationOutlined style={{ color: 'white', fontSize: '2.5rem', marginRight: '1rem' }} />
+          <TranslationOutlined style={{ color: 'white', fontSize: '2.5rem', marginRight: '2rem', marginTop: '0.4rem' }} />
         </Dropdown>
         <Dropdown overlay={(
           <Menu>
             <Menu.Item key="logout">
-              <Button type="link" onClick={logout}><LogoutOutlined />{t('header.logout')}</Button>
+              <Button type="link" onClick={logout}><PoweroffOutlined />{t('header.logout')}</Button>
             </Menu.Item>
           </Menu>
           )}
         >
-          <Button type="link" onClick={(e) => e.preventDefault}>
-            <div>
-              {user?.name}
-              <Avatar src={user?.picture} style={{ marginLeft: '1rem' }} />
-            </div>
-          </Button>
+          <Avatar size={32} src={user?.picture} style={{ marginLeft: '1rem' }} />
         </Dropdown>
       </div>
     </Container>

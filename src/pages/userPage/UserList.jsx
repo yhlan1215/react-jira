@@ -1,27 +1,44 @@
-import { Avatar, Divider, List } from 'antd'
+import { Avatar, Button, Table } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
+import { useTranslation } from 'react-i18next'
 import styled from 'styled-components'
 import { useSetting } from '../../context/SettingContext'
+import { useDocumentTitle } from '../../utils'
 
 const Container = styled.div`
   display: flex;
-  padding: 2rem;
+  flex-direction: column;
+  padding: 3rem;
   justify-content: left;
 `
 
 export function UserList() {
   const { users } = useSetting()
+  const { t } = useTranslation()
+  useDocumentTitle('用户列表')
 
   return (
     <Container>
-      <List
+      <h2>{t('userList.title')}</h2>
+      <Table
         dataSource={users}
-        renderItem={(item) => (
-          <List.Item>
-            <Avatar size={64} src={item.picture} style={{ marginRight: '2rem' }} />
-            {item.name}
-            <Divider />
-          </List.Item>
-        )}
+        columns={[
+          {
+            title: t('common.name'),
+            key: 'name',
+            dataIndex: 'name',
+            render: (value, user, index) => (
+              <div>
+                <Avatar size="large" src={user.picture} style={{ marginRight: '2rem' }} />{value}
+              </div>
+            )
+          },
+          {
+            title: t('common.action'),
+            key: 'action',
+            render: () => <Button type="link" disabled><DeleteOutlined />{t('common.delete')}</Button>
+          }
+        ]}
       />
     </Container>
   )
