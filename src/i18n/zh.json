@@ -50,6 +50,7 @@
         "organization":"项目组",
         "nameWarning":"请输入项目名",
         "organizationWarning":"请输入部门名",
+        "processorWarning":"请选择负责人",
         "deleteProject":"确定要删除这个工程吗?",
         "unKnown":"未知"
     },
@@ -64,7 +65,9 @@
         "state":"状态",
         "processorFirstOption":"暂未指定",
         "deleteKanban":"确定要删除这个看板吗?",
-        "deleteTask":"确定要删除这个任务吗?"
+        "deleteTask":"确定要删除这个任务吗?",
+        "nameWarning":"请输入任务名",
+        "priorityWarning":"请选择优先级"
     },
     "userList":{
         "title":"用户列表"

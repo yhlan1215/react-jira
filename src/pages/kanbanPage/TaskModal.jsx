@@ -92,20 +92,34 @@ export function TaskModal({ task, onClose, isOpen }) {
         wrapperCol={{ span: 12 }}
         ref={formRef}
       >
-        <Form.Item name="name" label={t('kanban.taskname')}>
+        <Form.Item
+          rules={[{ required: true, message: t('kanban.nameWarning') }]}
+          name="name"
+          label={t('kanban.taskname')}
+        >
           <Input
             type="text"
           />
         </Form.Item>
-        <Form.Item name="type" label={t('common.type')}>
+        <Form.Item
+          name="type"
+          label={t('common.type')}
+        >
           <TypeSelect />
         </Form.Item>
-        <Form.Item name="processorId" label={t('common.processor')}>
+        <Form.Item
+          name="processorId"
+          label={t('common.processor')}
+        >
           <UserSelect
             firstOptionLabel={t('kanban.processorFirstOption')}
           />
         </Form.Item>
-        <Form.Item name="priority" label={t('kanban.priority')}>
+        <Form.Item
+          rules={[{ required: true, message: t('kanban.priorityWarning') }]}
+          name="priority"
+          label={t('kanban.priority')}
+        >
           <Select>
             <Select.Option value="high">
               <HighIcon />
@@ -121,10 +135,16 @@ export function TaskModal({ task, onClose, isOpen }) {
             </Select.Option>
           </Select>
         </Form.Item>
-        <Form.Item name="point" label={t('kanban.point')}>
+        <Form.Item
+          name="point"
+          label={t('kanban.point')}
+        >
           <Input type="number" min={0} />
         </Form.Item>
-        <Form.Item name="kanbanId" label={t('kanban.state')}>
+        <Form.Item
+          name="kanbanId"
+          label={t('kanban.state')}
+        >
           <Select>
             {kanbans.map((kanban) => (
               <Select.Option

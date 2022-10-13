@@ -66,7 +66,7 @@ export function TaskCard({ task, index }) {
                       size="small"
                       src={users.find((user) => user.id === task.processorId)?.picture}
                     />
-                  ) : <Avatar icon={<UserOutlined />} /> }
+                  ) : <Avatar size="small" icon={<UserOutlined />} /> }
                 </Tooltip>
               </FooterContainer>
             </div>

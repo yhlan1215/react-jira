@@ -86,6 +86,7 @@ export function ProjectModal({ id, open, onClose, onProjectSaved }) {
           <Form.Item
             label={t('common.processor')}
             name="personId"
+            rules={[{ required: true, message: t('projectList.processorWarning') }]}
           >
             <UserSelect />
           </Form.Item>

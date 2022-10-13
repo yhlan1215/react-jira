@@ -85,7 +85,9 @@ export function Header() {
         <Dropdown overlay={(
           <Menu>
             <Menu.Item key="logout">
-              <Button type="link" onClick={logout}><PoweroffOutlined />{t('header.logout')}</Button>
+              <Button type="link" onClick={logout}>
+                <PoweroffOutlined />{t('header.logout')}
+              </Button>
             </Menu.Item>
           </Menu>
           )}

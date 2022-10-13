@@ -55,7 +55,7 @@ const Container = styled.div`
 
 export function UnauthPage() {
   const { t } = useTranslation()
-  useDocumentTitle('jira任务管理系统')
+  useDocumentTitle('Jira任务管理系统')
   return (
     <Container>
       <Header />
