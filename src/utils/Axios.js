@@ -5,7 +5,7 @@ import { createBrowserHistory } from 'history'
 import i18n from '../i18n/configs'
 
 const Axios = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: process.env.REACT_APP_API_URL,
   timeout: 20000,
   withCredentials: true
 })
