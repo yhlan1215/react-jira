@@ -21,7 +21,6 @@ export function UserSelect({ value, onChange, firstOptionLabel }) {
             <Avatar size="small" src={user.picture} style={{ marginRight: '1rem' }} />
             {user.name}
           </div>
-
         </Select.Option>
       ))}
     </Select>

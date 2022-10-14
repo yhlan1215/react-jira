@@ -14,8 +14,7 @@ export function AuthProvider({ children }) {
   const { t } = useTranslation()
 
   useEffect(() => {
-    const a = JSON.parse(localStorage.getItem('user'))
-    setUser(a)
+    setUser(JSON.parse(localStorage.getItem('user')))
   }, [])
 
   const signIn = async ({ username, password }) => {

@@ -55,7 +55,6 @@ Axios.interceptors.response.use((res) => {
       message.error(i18n.t('loginPage.loginError'))
     }
   }
-
   hideLoading()
   return Promise.reject(err)
 })

@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 export const cleanObject = (object) => {
   const isFalsy = (value) => (value === 0 ? true : !value)
-
   const result = { ...object }
 
   Object.keys(result).forEach((key) => {
@@ -12,16 +11,6 @@ export const cleanObject = (object) => {
     }
   })
   return result
-}
-
-export const useDebounce = (value, delay) => {
-  const [debouncedVale, setDebouncedValue] = useState(value)
-
-  useEffect(() => {
-    const timeout = setTimeout(() => { setDebouncedValue(value) }, delay)
-    return () => { clearTimeout(timeout) }
-  }, [value, delay])
-  return debouncedVale
 }
 
 export const useDocumentTitle = (title) => {

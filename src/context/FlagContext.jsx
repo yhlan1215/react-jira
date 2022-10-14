@@ -20,5 +20,8 @@ export function FlagProvider({ children }) {
 
 export const useFlag = () => {
   const context = useContext(FlagContext)
+  if (!context) {
+    throw new Error('useAuth必须在FlagProvider中使用')
+  }
   return context
 }

@@ -16,8 +16,14 @@ const Container = styled.div`
   margin-bottom: 3.2rem;
 `
 const HeaderLeft = styled.div`
-    display: flex;
-    height: 100%;
+  display: flex;
+  height: 100%;
+`
+const HeaderRight = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
 `
 
 export function Header() {
@@ -70,7 +76,7 @@ export function Header() {
           }}
         />
       </HeaderLeft>
-      <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', alignContent: 'center' }}>
+      <HeaderRight>
         <Dropdown
           placement="bottomRight"
           overlay={(
@@ -94,7 +100,7 @@ export function Header() {
         >
           <Avatar size={32} src={user?.picture} style={{ marginLeft: '1rem' }} />
         </Dropdown>
-      </div>
+      </HeaderRight>
     </Container>
   )
 }

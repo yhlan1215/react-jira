@@ -8,7 +8,12 @@ export function TypeSelect({ value, onChange, firstOptionLabel }) {
       value={value}
       onChange={onChange}
     >
-      {firstOptionLabel ? <Select.Option value="" style={{ color: 'lightgray', fontStyle: 'italic' }}>{firstOptionLabel}</Select.Option> : null}
+      {firstOptionLabel
+        ? (
+          <Select.Option value="" style={{ color: 'lightgray', fontStyle: 'italic' }}>
+            {firstOptionLabel}
+          </Select.Option>
+        ) : null}
       <Select.Option value="task">{t('kanban.task')}</Select.Option>
       <Select.Option value="bug">Bug</Select.Option>
     </Select>
